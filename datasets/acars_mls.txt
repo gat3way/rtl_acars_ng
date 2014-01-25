@@ -1,0 +1,365 @@
+00	Emergency Situation Report	
+10	User defined messages/No header	
+10KL	KLM ETA Report	
+11	Inrange Arrival report	
+12	?????	
+13	CMU loadsheet uplink	
+14	General aviation free text message	
+15	General aviation position report	
+15GS	Business Flight Position Report	
+16	General aviation weather request	
+16QR	Qatar Airways Position Report	
+17	Estimated Time of Arrival report	
+18	General aviation weather report	
+19	ATIS report	
+1A	Change in operating frequency	
+1B	?????	
+1C	Flight plan request	
+1D	?????	
+1E	?????	
+1G	?????	
+1L	Off message	
+1M	Estimated Time of Arrival report	
+1Q	?????	
+1X	Loss of VHF communications	
+20	SAS: Initialization	
+21	SAS: Take off data calculation	
+22	?????	
+23	SAS: Loadsheet uplink	
+24	SAS: Crewlist	
+24NW	Weather Request	
+25	SAS: Special load notification	
+26	SAS: Sigmet message	
+27	Weather request for SA	
+28	Weather request	
+29	SAS: Flow message	
+2A	?????	
+2B	?????	
+2L	?????	
+2P	?????	
+2S	Weather request	
+2T80	CANADA 300 AIRLINES DEFINED 	
+2T89	CANADA 300 AIRLINES DEFINED 	
+2U	Weather	
+30	Position report	
+30ME	Middle Eastern Position report	
+31	Weather report	
+32	?????	
+33	?????	
+36	In range message	
+38	?????	
+39	Weather request	
+3E	?????	
+3F	Estimated Time of Arrival	
+3G	Free text message	
+3J	Downlink message	
+3R	?????	
+3S	Downlink message	
+3U	Acknowledgement	
+3V20	Position report	
+41	SAS: Flow message	
+42	?????	
+44	?????	
+45	?????	
+49	?????	
+4L	TOD??	
+4M	Cargo data	
+4P	Weather report/forecast	
+4Q	Departure report	
+4S	Weather request	
+4T	ETA report	
+4U	Weather	
+4s	Auto weather forecast	
+51	Ground GMT request response	
+52	Ground UTC request	
+53	Spare	
+54	Aircrew or ground initiated voice contact request	
+57	Alternate aircrew initiated position report	
+5D	ATIS request	
+5P	Temporary suspension of ACARS service	
+5R	Aircrew initiated position report	
+5U	Weather request	
+5V	VDL switch advisory	
+5Y	Revision to previous ETA, or diversion	
+5Y80	ATLAS AIR INC. DEFINED 	
+5Z	Airline designated downlink	
+7A	Aircrew initiated engine data/takeoff thrust	
+7B	Aircrew initiated miscellaneous message	
+80	Aircrew addressed downlink	
+81	Off report	
+82	Aircrew addressed downlink	
+83	Aircrew addressed downlink	
+84	Aircrew addressed downlink	
+85	Aircrew addressed downlink	
+86	Aircrew addressed downlink	
+87	Aircrew addressed downlink	
+88	Aircrew addressed downlink	
+88SQ	Singapur Airlines weather request	
+89	Aircrew addressed downlink	
+8A	SAS Out report	
+8B	SAS Off report	
+8C	SAS On report	
+8D	SAS In report	
+8E	SAS Out/return in report	
+8G	SAS Take off data calculation request	
+8H	SAS Loadsheet request/confirmation	
+8I	SAS Flightplan request	
+8J	SAS Crewlist request	
+8X	Uplink ATIS information	
+8Z	Avionics unable to process data	
+9E30	NORTHWEST AIRLINK DEFINED 	
+A0	ATIS facilities notification	
+A1	Deliver oceanic clearance	
+A3	Deliver departure clearance	
+A4	Acknowledge departure clearance	
+A5	Request position report	
+A6	Requested ADS report	
+A7	Forward free text to aircraft	
+A8	Deliver departure slot	
+A9	Deliver ATIS information	
+AA	ATC communications	
+AA10	Frequency change	
+AA14	AMERICAN AIRLINES DEFINED 	
+AA18	AMERICAN AIRLINES DEFINED 	
+AA40	AMERICAN AIRLINES DEFINED 	
+AA5J	AMERICAN AIRLINES DEFINED 	
+AB	Terminal weather information	
+AB82	Free text report	
+AC	Pushback clearance	
+AC2s	Request ATIS information	
+AC4F	Off report	
+AC4M	Printer specific message	
+AC4P	Change Acars mode 	
+AC4Q	Departure message	
+AC4R	Off specific message	
+AC4T	ETA/position report	
+AC4s	Auto weather forecast	
+AD	Expected taxi clearance	
+AF	CPC command	
+AF1B	AIR FRANCE DEFINED  	
+AF1D	AIR FRANCE DEFINED 	
+AF21	AIR FRANCE DEFINED  	
+AF24	AIR FRANCE DEFINED 	
+AF26	AIR FRANCE DEFINED  	
+AF29	AIR FRANCE DEFINED  	
+AF2A	AIR FRANCE DEFINED  	
+AF2B	AIR FRANCE DEFINED 	
+AF2C	AIR FRANCE DEFINED 	
+AF2D	AIR FRANCE DEFINED  	
+AF2N	AIR FRANCE DEFINED  	
+AF2T	AIR FRANCE DEFINED  	
+AF2Z	AIR FRANCE DEFINED  	
+AF30	AIR FRANCE DEFINED 	
+AF31	AIR FRANCE DEFINED 	
+AF41	AIR FRANCE DEFINED  	
+AF42	AIR FRANCE DEFINED  	
+AF46	AIR FRANCE DEFINED  	
+AF4A	AIR FRANCE DEFINED  	
+AF4D	AIR FRANCE DEFINED  	
+AF4G	AIR FRANCE DEFINED 	
+AF4H	AIR FRANCE DEFINED 	
+AF80	AIR FRANCE DEFINED 	
+AF8A	AIR FRANCE DEFINED  	
+AF8B	AIR FRANCE DEFINED  	
+AF8C	AIR FRANCE DEFINED 	
+AF8D	AIR FRANCE DEFINED 	
+AF8X	AIR FRANCE DEFINED 	
+AN1F	AANSETT AIRLINES DEFINED 	
+AS80	ALASKA AIRLINES DEFINED 	
+AT15	ROYAL AIR MAROC DEFINED 	
+AX	Uplink message formats	
+AY11	Out report	
+AY12	Off report	
+AY13	On report	
+AY14	Inn report	
+AY1M	ETA estimate	
+AY31	Position report	
+AY81	Free text message	
+AYX1	Weather request 	
+B0	ATIS facilities notification	
+B1	Request oceanic clearance	
+B2	Request oceanic readback	
+B3	Request departure clearance	
+B4	Acknowledge departure clearance 	
+B5	Provide position report	
+B6	Provide ADS report	
+B7	Forward free text to ATS	
+B8	Request departure slot	
+B9	Request ATIS information	
+BA	ATC communications	
+BA10	ETA report or FST report	
+BA12	BRITISH AIRWAYS DEFINED  	
+BA13	BRITISH AIRWAYS DEFINED  	
+BA14	BRITISH AIRWAYS DEFINED 	
+BA15	Flight schedule times	
+BA80	BA Time check	
+BB	Terminal weather information	
+BC	Pushback clearance request	
+BD	Expected taxi clearance request	
+BE	CPC log-on/log-off request	
+BF	CPC wilco/unable response	
+BR13	Weather request	
+BU10	Arrival/departure report	
+BU20	Out report	
+BU21	Off report	
+BU23	Initialization	
+BU5A	Ground GMT request	
+BUX1	Weather request 	
+BW80	WEST INDIAN DEFINED 	
+C0	Uplink message to all cockpit printers	
+C1	Uplink message to the cockpit printer 1	
+C2	Uplink message to the cockpit printer 2	
+C3	Uplink message to the cockpit printer 3	
+CA	Printer status = error	
+CA12	Weather request	
+CB	Printer status = busy	
+CC	Printer status = in local test mode	
+CD	Printer status = no paper	
+CE	Printer status = buffer overrun	
+CF	Printer status = status communication error	
+CI20	CHINA AIRLINES DEFINED 	
+CI80	CHINA AIRLINES DEFINED 	
+CP80	Position report	
+DF	Digital acquisition unit	
+DH1L	Off message	
+DL80	Position report	
+E1	Internet e-mail message	
+EC	Engine display system	
+EI85	Arrival report	
+EI87	AIR LINGUS DEFINED 	
+EIH1	Data download	
+F3	Dedicated transceiver advisory	
+FX10	ATIS request message	
+FX11	In range arrival report	
+FX16	Automatic position report	
+GS15	Position Report	
+H1	Message to/from terminal	
+H2	Meteorological report/command	
+H3	Icing report	
+HD	HF data radio	
+HF	HFDL position report	
+HF20	Departure aerodrome	
+HF2T	Call other aircraft	
+HV20	Resetting ACARS system	
+HX	Undelivered uplink report	
+JL12	Weather request	
+KL10	ETA report	
+KL1L	Weather request 	
+KL20	Resetting ACARS system	
+KL32	Weather/flow message	
+KL41	Meet and assist	
+KL43	Acars anomaly report	
+KL44	Acars request route change	
+KLQP	Off report	
+KLQR	On report	
+KLQS	In report	
+LH10	Frequency change	
+LH1B	Off report	
+LH1C	On report	
+LH1L	Weather request	
+LH3L	Command/response uplink	
+LT27	Position report	
+LX28	Position Report	
+LX35	SWISS Position Report	
+M1	IATA departure message	
+M2	IATA arrival message	
+M3	IATA return to ramp message	
+M4	IATA return from airborne message	
+ME30	Position report	
+MU11	Present position report	
+NH13	Weather request	
+NW17	Status report	
+NW21	Weather request	
+NW24	Weather request	
+NW30	Free text message 	
+NW31	Weather report	
+NW33	Position report	
+NW36	In range message	
+NW39	Free text message	
+OU26	ETA Report	
+OUHX	Weather Report	
+Q0	ACARS link test	
+Q1	ETA departure/arrival reports	
+Q2	ETA reports	
+Q3	Clock update	
+Q4	Voice circuit busy	
+Q5	Unable to process uplinked messages	
+Q6	Voice-to-ACARS changeover	
+Q7	Delay message	
+QA	Out/fuel report	
+QB	Off report	
+QC	On report	
+QD	In/fuel report	
+QE	Out/fuel destination report	
+QF	Off/destination report	
+QG	Out/return in report	
+QH	Out report	
+QK	Landing report	
+QL	Arrival report	
+QM	Arrival information report	
+QN	Diversion report	
+QP	Out report	
+QQ	Departure report	
+QR	On report	
+QR16	Position Report	
+QS	In report	
+QT	Out/return/in report	
+QX	Intercept, unable to process	
+RA	Transmit diagnostic	
+RB	Response aircraft terminal to RA message	
+S1	Network/VHF statistics report	
+S2	VHF performance report/request	
+S3	LRU configuration report/request	
+SA	Media Advisory	
+SK20	Initialization	
+SK21	Take off data calculation	
+SK23	Loadsheet uplink	
+SK24	Crewlist	
+SK25	Special load notification	
+SK26	Sigmet message	
+SK29	Flow message	
+SK31	Change frequency	
+SK41	Slot time revision	
+SK80	On track/position report	
+SK83	Flight summary (ETA est.)	
+SK84	Free text message	
+SK85	Free text message	
+SK86	Position/weather report	
+SK87	Crew message	
+SK88	Msg to dispatch	
+SK89	Msg to station ahead	
+SK8A	Out report	
+SK8B	Off report	
+SK8C	On report	
+SK8D	In report	
+SK8E	Out/return in report	
+SK8G	Take off data calculation request	
+SK8H	Loadsheet request/confirmation	
+SK8I	Flightplan request	
+SK8J	Crewlist request	
+SKRA	Flow message	
+SQ	Link test message	
+SQ88	Weather request	
+T1	Cabin terminal message	
+T2	Cabin terminal message	
+UA40	UNITED AIRLINES DEFINED  	
+UA4I	UNITED AIRLINES DEFINED  	
+UA80	Position report	
+UA8X	UNITED AIRLINES DEFINED	
+UP30	Position report	
+UP31	In report	
+UP3F	ETA message	
+UP3G	Free text message	
+UP3I	On report	
+UP3J	Flight plan	
+UP3S	Maintenance message	
+UP3T	Weather report/forecast	
+UP3U	Uplink acknowledgement	
+UP47	Off report	
+UV20	Position report	
+WO	Weather observation report	
+X1	Service provider defined	
+_ 	ACK	
+_*	ACK	
+_	ACK	
+¨ 	ACK	
