@@ -95,29 +95,6 @@ struct mstat_s {
 } mstat[2];
 
 
-struct acars_aircraft_primary {
-	char *reg;
-	char *vendor;
-	char *short_type;
-	char *full_type;
-	char *cn;
-	char *carrier_iata;
-	char *carrier_icao;
-	char *remarks;
-};
-
-struct acars_aircraft_primary acars_aircrafts_primary[64000];
-
-struct acars_aircraft_secondary {
-	char *reg;
-	char *type;
-	char *carrier_icao;
-	char *cn;
-};
-
-struct acars_aircraft_secondary acars_aircrafts_secondary[64000];
-
-
 
 
 struct acars_flight {
@@ -135,7 +112,7 @@ struct acars_aircraft {
 	char *manufacturer;
 	char *model;
 };
-struct acars_aircraft acars_aircrafts[256000];
+struct acars_aircraft acars_aircrafts[512000];
 
 
 struct acars_airport {
@@ -169,6 +146,9 @@ static pthread_t demod_thread;
 static pthread_cond_t data_ready;   /* shared buffer filled */
 static pthread_rwlock_t data_rw;    /* lock for shared buffer */
 static pthread_mutex_t data_mutex;  /* because conds are dumb */
+
+static pthread_mutex_t dataset_mutex;
+
 static volatile int do_exit = 0;
 static rtlsdr_dev_t *dev = NULL;
 static int lcm_post[17] = {1,1,1,3,1,5,3,7,1,9,5,11,3,13,7,15,1};
@@ -219,7 +199,7 @@ struct fm_state
 
 typedef struct {
 	unsigned char mode;
-	unsigned char addr[32];
+	unsigned char addr[8];
 	unsigned char ack;
 	unsigned char label[3];
 	unsigned char bid;
@@ -398,10 +378,7 @@ void load_aircrafts(void)
 		tabpos = strchr(item, '\t');
 		if (!tabpos) { fprintf(stderr, "Parse error on line: %s\n", line); continue; }
 		tabpos[0] = 0;
-		acars_aircrafts[i].registration = malloc(10);
-		memset(acars_aircrafts[i].registration,0,10);
-		strncpy(acars_aircrafts[i].registration,item,7);
-		//strdup(item);
+		acars_aircrafts[i].registration = strdup(item);
 		item = tabpos + 1;
 
 		tabpos = strchr(item, '\t');
@@ -419,7 +396,6 @@ void load_aircrafts(void)
 		tabpos = strchr(item, '\t');
 		if (!tabpos) {tabpos = malloc(1);tabpos[0] = 0;}
 		acars_aircrafts[i].model = strdup(item);
-		//if (acars_aircrafts[i].model[strlen(acars_aircrafts[i].model)-1]=='\n') acars_aircrafts[i].model[strlen(acars_aircrafts[i].model)-1] = 0;
 		i++;
 	}
 
@@ -727,7 +703,6 @@ static int build_mesg(char *txt, int len, msg_t * msg) {
 
 	msg->bid = txt[k];
 	k++;
-
 	k++;
 
 	for (i = 0; i < 4; i++, k++) {
@@ -740,7 +715,8 @@ static int build_mesg(char *txt, int len, msg_t * msg) {
 	}
 	msg->fid[6] = '\0';
 
-	strcpy(msg->txt, &(txt[k]));
+	strncpy(msg->txt, &(txt[k]),255);
+	msg->txt[255]='\0';
 
 	return 1;
 }
@@ -860,6 +836,11 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 			else {
 				msg->crc = 1;
 				build_mesg(st->txt, st->ind, msg);
+				// Do some heuristic checks
+				if (msg->addr[7]!=0) {st->state = HEADL;return 8;}
+				int a;
+				for (a=0;a<8;a++) if ((msg->addr[a]<32)&&(msg->addr[a]>127)) {st->state = HEADL;return 8;}
+				for (a=0;a<6;a++) if ((msg->fid[a]<32)&&(msg->fid[a]>127)) {st->state = HEADL;return 8;}
 				return 0;
 			}
 			return 8;
@@ -1112,6 +1093,21 @@ void process_57(char *txt)
 }
 
 
+void process_h1(char *txt)
+{
+    if (!strncmp(txt,"#DFB",4)) printf("Source: Digital Flight Data Acquisition Unit\n");
+    if (!strncmp(txt,"#CFB",4)) printf("Source: Central Fault Display\n");
+    if (!strncmp(txt,"#TX",3)) printf("Source: Cabin Terminal\n");
+    if (!strncmp(txt,"#EX",3)) printf("Source: Electronic Flight Bag\n");
+    if (!strncmp(txt,"#FC",3)) printf("Source: Flight Management System\n");
+    if (!strncmp(txt,"#OAT",4)) printf("Source: Optional Auxillary System\n");
+    if (!strncmp(txt,"#SD",3)) printf("Source: Satellite Data Unit\n");
+    if (!strncmp(txt,"#TT",3)) printf("Source: Cabin Terminal\n");
+    if (!strncmp(txt,"#HD",3)) printf("Source: HF Data Radio\n");
+    if (!strncmp(txt,"#ENG",4)) printf("Source: Engine Indicating System\n");
+}
+
+
 
 
 
@@ -1127,7 +1123,6 @@ int is_flight_num(const char *text)
     }
     return ok;
 }
-
 
 
 
@@ -1160,17 +1155,19 @@ void print_mesg(msg_t * msg) {
 
 	printf("Aircraft reg: %s, ", msg->addr);
 	printf("flight id: %s\n", msg->fid);
-	msg->addr[7]='\0';
 	i=0;
 	if ((msg->addr)&&(strlen(msg->addr)<8)&&(strlen(msg->addr)>1)&&(strcmp(msg->addr,".......")!=0))
 	{
 	    while(acars_aircrafts[i].registration)
 	    {
-		const char *regtmp = (const char *) msg->addr;
-		while ((regtmp[0] == '.'))
-			{regtmp++;}
+		char regtmp[8];
+		memset(regtmp,0,8);
+		int ind = 0;
+		while ((ind<8)&&(msg->fid[ind]=='.')) ind++;
+		strncpy(&regtmp[0],&msg->addr[ind],7);
+
 		int len = (strlen(regtmp)>7) ? 7 : strlen(regtmp);
-		if (acars_aircrafts[i].registration)
+		if ((acars_aircrafts[i].registration) && (strlen(acars_aircrafts[i].registration)<8))
 		if ((len>0)&&(!strncmp(acars_aircrafts[i].registration, regtmp,len))){
 			printf("Aircraft: %s \n",acars_aircrafts[i].manufacturer);
 			printf("Registration: %s \n",acars_aircrafts[i].registration);
@@ -1194,8 +1191,8 @@ aircraft_finished:
 		regtmp[1]=msg->fid[1];
 		regtmp[2]='_';
 		ind = 2;
-		while ((ind<8)&&(msg->fid[ind]==0)) ind++;
-		strcpy(&regtmp[3],&msg->fid[ind]);
+		while ((ind<8)&&(msg->fid[ind]=='0')) ind++;
+		strncpy(&regtmp[3],&msg->fid[ind],8-ind);
 		
 		
 		if ((!found)&&(!strncmp(acars_flights[i].flightid, regtmp,2))&&(is_flight_num(regtmp))) {
@@ -1203,7 +1200,7 @@ aircraft_finished:
 		    found++;
 		}
 
-		if ((!strncmp(acars_flights[i].flightid, regtmp,2)) && (!strncmp(acars_flights[i].flightid+3, regtmp+3,strlen(regtmp+3))))
+		if ((is_flight_num(regtmp))&&(!strncmp(acars_flights[i].flightid, regtmp,2)) && (!strncmp(acars_flights[i].flightid+3, regtmp+3,strlen(regtmp+3))))
 		{
 			long x = 0;
 			while((acars_airports[x].code)&&(found2==0)){
@@ -1253,6 +1250,7 @@ aircraft_finished:
 	if (!strcmp(msg->label,"QS")) process_qs(msg->txt);
 	if (!strcmp(msg->label,"QT")) process_qt(msg->txt);
 	if (!strcmp(msg->label,"57")) process_57(msg->txt);
+	if (!strcmp(msg->label,"H1")) process_h1(msg->txt);
 
 	printf("Message content:-\n%s", msg->txt);
 
@@ -1736,7 +1734,9 @@ static void *demod_thread_fn(void *arg)
 {
 	struct fm_state *fm2 = arg;
 	// So that DBs will be loaded, we'd better use a mutex here
-	sleep(1);
+	pthread_mutex_lock(&dataset_mutex);
+	pthread_mutex_unlock(&dataset_mutex);
+
 	while (!do_exit) {
 		safe_cond_wait(&data_ready, &data_mutex);
 		full_demod(fm2);
@@ -1871,6 +1871,7 @@ int main(int argc, char **argv)
 	pthread_cond_init(&data_ready, NULL);
 	pthread_rwlock_init(&data_rw, NULL);
 	pthread_mutex_init(&data_mutex, NULL);
+	pthread_mutex_init(&dataset_mutex, NULL);
 	fm.sample_rate = (uint32_t) 48000;
 
 	while ((opt = getopt(argc, argv, "d:f:g:s:b:l:o:t:p:EFA:rNWMULRDCh")) != -1) {
@@ -2035,7 +2036,7 @@ int main(int argc, char **argv)
 	r = rtlsdr_reset_buffer(dev);
 	if (r < 0) {
 		fprintf(stderr, "WARNING: Failed to reset buffers.\n");}
-
+	pthread_mutex_lock(&dataset_mutex);
 	pthread_create(&demod_thread, NULL, demod_thread_fn, (void *)(&fm));
 	/*rtlsdr_read_async(dev, rtlsdr_callback, (void *)(&fm),
 			      DEFAULT_ASYNC_BUF_NUMBER,
@@ -2049,6 +2050,7 @@ int main(int argc, char **argv)
 	init_mesg();
 	printf("Listening for ACARS traffic...\n");
 	fprintf(stderr, "\n");
+	pthread_mutex_unlock(&dataset_mutex);
 
 	while (!do_exit) {
 		sync_read(buffer, ACTUAL_BUF_LENGTH, &fm);
