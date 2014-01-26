@@ -896,7 +896,7 @@ void process_5u(char *txt)
     printf("Weather report requested from: ");
     while (txt[cur]!=0)
     {
-	if ((txt[cur]<'Z')&&(txt[cur]>'A'))
+	if ((txt[cur]<='Z')&&(txt[cur]>='A'))
 	{
 	    airport[cur2]=txt[cur];
 	    cur2++;
@@ -917,6 +917,7 @@ void process_5u(char *txt)
 		cur2 = 0;
 	    }
 	}
+	else cur2=0;
 	cur++;
     }
     printf("\n");
@@ -1095,16 +1096,20 @@ void process_57(char *txt)
 
 void process_h1(char *txt)
 {
-    if (!strncmp(txt,"#DFB",4)) printf("Source: Digital Flight Data Acquisition Unit\n");
-    if (!strncmp(txt,"#CFB",4)) printf("Source: Central Fault Display\n");
-    if (!strncmp(txt,"#TX",3)) printf("Source: Cabin Terminal\n");
-    if (!strncmp(txt,"#EX",3)) printf("Source: Electronic Flight Bag\n");
-    if (!strncmp(txt,"#FC",3)) printf("Source: Flight Management System\n");
-    if (!strncmp(txt,"#OAT",4)) printf("Source: Optional Auxillary System\n");
-    if (!strncmp(txt,"#SD",3)) printf("Source: Satellite Data Unit\n");
-    if (!strncmp(txt,"#TT",3)) printf("Source: Cabin Terminal\n");
-    if (!strncmp(txt,"#HD",3)) printf("Source: HF Data Radio\n");
-    if (!strncmp(txt,"#ENG",4)) printf("Source: Engine Indicating System\n");
+    if (!strncmp(txt,"#DF",3)) printf("Source: Digital Flight Data Acquisition Unit\n");
+    if (!strncmp(txt,"#CF",3)) printf("Source: Central Fault Display\n");
+    if (!strncmp(txt,"#M1",3)) printf("Source: Flight Management Computer, Left\n");
+    if (!strncmp(txt,"#M2",3)) printf("Source: Flight Management Computer, Right\n");
+    if (!strncmp(txt,"#M3",3)) printf("Source: Flight Management Computer, Center\n");
+    if (!strncmp(txt,"#MD",3)) printf("Source: Flight Management Computer, Selected\n");
+    if (!strncmp(txt,"#EC",3)) printf("Source: Engine Display System\n");
+    if (!strncmp(txt,"#EI",3)) printf("Source: Engine Indicating System\n");
+    if (!strncmp(txt,"#PS",3)) printf("Source: Keyboard/Display Unit\n");
+    if (!strncmp(txt,"#S1",3)) printf("Source: SDU, Left\n");
+    if (!strncmp(txt,"#S2",3)) printf("Source: SDU, Right\n");
+    if (!strncmp(txt,"#SD",3)) printf("Source: SDU, Selected\n");
+    if (!strncmp(txt,"#T",2)) printf("Source: Cabin Terminal Message\n");
+    if (!strncmp(txt,"#WO",3)) printf("Source: Weather Observation Report\n");
 }
 
 
@@ -1116,11 +1121,12 @@ int is_flight_num(const char *text)
     int a=0;
     int ok=1;
 
-    while (text[a]!=0) 
+    while (a<6) 
     {
-	if ( (text[a]>'Z') && (text[a]<'A')) ok = 0;
+	if (!((text[a]=='-') || (text[a]=='.') || ((text[a]<='Z') && (text[a]>='A')) || ((text[a]>='0') && (text[a]<='9')))) ok = 0;
 	a++;
     }
+    if (!((text[2]>='0') && (text[a]<='2'))) ok = 0;
     return ok;
 }
 
@@ -1163,11 +1169,10 @@ void print_mesg(msg_t * msg) {
 		char regtmp[8];
 		memset(regtmp,0,8);
 		int ind = 0;
-		while ((ind<8)&&(msg->fid[ind]=='.')) ind++;
-		strncpy(&regtmp[0],&msg->addr[ind],7);
+		while ((ind<8)&&(msg->addr[ind]=='.')) ind++;
+		strcpy(regtmp,&msg->addr[ind]);
 
-		int len = (strlen(regtmp)>7) ? 7 : strlen(regtmp);
-		if ((acars_aircrafts[i].registration) && (strlen(acars_aircrafts[i].registration)<8))
+		int len = strlen(regtmp);
 		if ((len>0)&&(!strncmp(acars_aircrafts[i].registration, regtmp,len))){
 			printf("Aircraft: %s \n",acars_aircrafts[i].manufacturer);
 			printf("Registration: %s \n",acars_aircrafts[i].registration);
@@ -1183,24 +1188,27 @@ aircraft_finished:
 	i=0;
 	int found=0;
 	int found2=0;
+	int found3=0;
+	
+	char regtmp[8];
+	memset(regtmp,0,8);
+	int ind = 0;
+	regtmp[0]=msg->fid[0];
+	regtmp[1]=msg->fid[1];
+	regtmp[2]='0';
+	ind = 2;
+	while ((ind<8)&&(msg->fid[ind]=='0')) ind++;
+	strncpy(&regtmp[3],&msg->fid[ind],8-ind);
+	int correct = is_flight_num(regtmp);
 	if (strlen(msg->fid)>1) while(acars_flights[i].flightid){
-		char regtmp[8];
-		memset(regtmp,0,8);
-		int ind = 0;
-		regtmp[0]=msg->fid[0];
-		regtmp[1]=msg->fid[1];
-		regtmp[2]='_';
-		ind = 2;
-		while ((ind<8)&&(msg->fid[ind]=='0')) ind++;
-		strncpy(&regtmp[3],&msg->fid[ind],8-ind);
 		
 		
-		if ((!found)&&(!strncmp(acars_flights[i].flightid, regtmp,2))&&(is_flight_num(regtmp))) {
+		if ((!found)&&(!strncmp(acars_flights[i].flightid, regtmp,2))&&(correct)) {
 		    printf("Airline: %s \n",acars_flights[i].airline);
 		    found++;
 		}
 
-		if ((is_flight_num(regtmp))&&(!strncmp(acars_flights[i].flightid, regtmp,2)) && (!strncmp(acars_flights[i].flightid+3, regtmp+3,strlen(regtmp+3))))
+		if ((correct)&&(!strncmp(acars_flights[i].flightid, regtmp,2)) && (!strncmp(acars_flights[i].flightid+3, regtmp+3,strlen(regtmp+3))))
 		{
 			long x = 0;
 			while((acars_airports[x].code)&&(found2==0)){
@@ -1212,10 +1220,10 @@ aircraft_finished:
 				x++;
 			}
 			x=0;
-			found2=0;
-			while((acars_airports[x].code)&&(found2==0)){
+			while((acars_airports[x].code)&&(found3==0)){
 				if(!strcmp(acars_airports[x].code, acars_flights[i].to)){
 					printf("To: %s - %s (%s, %s) \n",acars_airports[x].code,acars_airports[x].name,acars_airports[x].city,acars_airports[x].country);
+					found3++;
 					break;
 				}
 				x++;
