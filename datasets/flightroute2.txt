@@ -459,7 +459,7 @@ WW_03E	EICK	EGCC	bmibaby
 LS_133P	EIDW	GCFV	Jet2.com	
 U2_1888	EDDM	EGCC	EasyJet Airline	
 WW_9452	EGSH	EGNX	bmibaby	
-LH_8328	EDFH	CYYR	Lufthansa Cargo	
+LH_8328	EDFH	CYYR	Lufthansa	
 KL_0672	CYUL	EHAM	KLM Royal Dutch Airlines	
 BY_175	MUVR	EGCC	Thomsonfly	
 BY_199	TBPB	EGNX	Thomsonfly	
@@ -705,7 +705,7 @@ AY_1619	EFOU	GCTS	Finnair
 U2_6674	LEBL	EGAA	EasyJet Airline	
 LS_073P	LIMC	EGCC	Jet2.com	
 FR_36K	EPBY	EIDW	Ryanair	
-LH_8251	KORD	EDDF	Lufthansa Cargo	
+LH_8251	KORD	EDDF	Lufthansa	
 MT_347L	LCPH	EGCC	Thomas Cook Airlines	
 FR_7803	ENTO	EGPK	Ryanair	
 ZB_6587	HESH	EGCC	Monarch Airlines	
@@ -1106,7 +1106,7 @@ CJ_03T	EGLC	EGPF	BA CityFlyer
 EI_2151	EGLL	EIDW	Aer Lingus	
 BA_784	EGLL	ESSA	British Airways	
 MT_56L	GCFV	EGCC	Thomas Cook Airlines	
-LH_8208	EDDF	KORD	Lufthansa Cargo	
+LH_8208	EDDF	KORD	Lufthansa	
 U2_47CE	EGSS	EGPF	EasyJet Airline	
 RC_7844	EKVG	EIDW	Atlantic Airways	
 MT_921K	EGAA	GCLP	Thomas Cook Airlines	
@@ -9418,7 +9418,7 @@ TX_512	LFPO	TFFF	Air Caraïbes
 TX_530	LFPO	MTPP	Air Caraïbes	
 TX_538	LFPO	TFFR	Air Caraïbes	
 TX_580	LFPO	TFFR	Air Caraïbes	
-LH_8411	WSSS	EDDF	Lufthansa Cargo	
+LH_8411	WSSS	EDDF	Lufthansa	
 2K_701	KJFK	SEGU	Aerolineas Galapagos (Aerogal)	
 ST_1600	EDDL	LTCG	Germania	
 ST_2012	EDDV	LTAF	Germania	
@@ -11297,8 +11297,8 @@ AY_834	EGLL	EFHK	Finnair
 RF_738	SPIM	KLAX	Florida West International Airways	
 RF_762	MPTO	KLAX	Florida West International Airways	
 RF_764	SPIM	KLAX	Florida West International Airways	
-LH_8162	EDDF	KJFK	Lufthansa Cargo	
-LH_8187	KORD	EDDF	Lufthansa Cargo	
+LH_8162	EDDF	KJFK	Lufthansa	
+LH_8187	KORD	EDDF	Lufthansa	
 ST_2115	GCLP	EDSB	Germania	
 ST_7810	EDDW	GCLP	Germania	
 HA_15	KSAN	PHNL	Hawaiian Airlines	
@@ -12742,7 +12742,7 @@ WK_51	VTSP	LSZH	Edelweiss Air
 EY_069	OMAA	UUDD	Etihad Airways	
 BR_6080	OMDB	RCTP	EVA Air	
 AY_2945	EFHK	OMDB	Finnair	
-LH_8368	EDDF	VIDP	Lufthansa Cargo	
+LH_8368	EDDF	VIDP	Lufthansa	
 A9_506	UGSB	UGTB	Georgian Airways	
 TK_254	LTBA	UTDD	Turkish Airlines	
 TK_0254	LTBA	UTDD	Turkish Airlines	
@@ -13411,8 +13411,8 @@ RF_742	MPTO	KLAX	Florida West International Airways
 RF_745	KLAX	KMIA	Florida West International Airways	
 RF_747	KLAX	KMIA	Florida West International Airways	
 RF_770	KMIA	KLAX	Florida West International Airways	
-LH_8326	EDDL	MDSD	Lufthansa Cargo	
-LH_8458	EDDF	VHHH	Lufthansa Cargo	
+LH_8326	EDDL	MDSD	Lufthansa	
+LH_8458	EDDF	VHHH	Lufthansa	
 ST_1387	LCLK	EDDT	Germania	
 ST_2448	EDDW	HEGN	Germania	
 ST_3814	EDDL	OSDI	Germania	
@@ -14936,7 +14936,7 @@ DC_3105	ESNO	ESSA	Golden Air
 DC_3108	ESSA	ESNO	Golden Air	
 DC_3135	ESNO	ESSA	Golden Air	
 DC_720	KSDL	ESSB	Golden Air	
-LH_8327	SVMI	EDDF	Lufthansa Cargo	
+LH_8327	SVMI	EDDF	Lufthansa	
 2K_28	SEQU	SEGU	Aerolineas Galapagos (Aerogal)	
 2K_700	SEGU	KJFK	Aerolineas Galapagos (Aerogal)	
 ST_2308	EDDV	LTAC	Germania	
@@ -18857,8 +18857,8 @@ TX_515	TFFF	LFPO	Air Caraïbes
 TX_532	LFPO	TNCM	Air Caraïbes	
 RF_660	KMIA	KLAX	Florida West International Airways	
 RF_721	KLAX	KMIA	Florida West International Airways	
-LH_8209	KATL	EDDF	Lufthansa Cargo	
-LH_8415	VABB	EDDF	Lufthansa Cargo	
+LH_8209	KATL	EDDF	Lufthansa	
+LH_8415	VABB	EDDF	Lufthansa	
 ST_5184	EDDM	LCPH	Germania	
 ST_5842	EDSB	GCTS	Germania	
 4U_12	EDDK	EDDB	Germanwings	
@@ -21319,7 +21319,7 @@ RP_5914	KPHL	KCLE	Chautauqua Airlines
 WG_9547	CYVR	MMBT	Sunwing Airlines	
 OR_336	MUVR	MMUN	Arkefly	
 OR_335	EHAM	MUVR	Arkefly	
-LH_8243	MMMX	KDFW	Lufthansa Cargo	
+LH_8243	MMMX	KDFW	Lufthansa	
 ZB_534B	EGCC	LEPA	Monarch Airlines	
 MT_8548	EGAA	HESH	Thomas Cook Airlines	
 ZB_516L	EGCC	LEBL	Monarch Airlines	
@@ -22892,8 +22892,8 @@ AY_7711	EFHK	EHAM	Finnair
 AY_813N	EFHK	EBBR	Finnair	
 AY_852T	EDDH	EFHK	Finnair	
 TX_570	LFPO	SOCA	Air Caraïbes	
-LH_8186	EDDF	KORD	Lufthansa Cargo	
-LH_8279	TNCC	EDDF	Lufthansa Cargo	
+LH_8186	EDDF	KORD	Lufthansa	
+LH_8279	TNCC	EDDF	Lufthansa	
 ST_4838	EDDW	LTAI	Germania	
 ST_7736	EDNY	LTAI	Germania	
 4U_065	ETNL	EDDK	Germanwings	
@@ -25056,7 +25056,7 @@ AB_23D	LEIB	LEPA	Air Berlin
 AB_3508	EDRZ	LEPA	Air Berlin	
 U2_913Z	EGCC	LEPA	EasyJet Airline	
 AF_204B	LFPG	LEBL	Air France	
-LH_8269	GOOY	EDDF	Lufthansa Cargo	
+LH_8269	GOOY	EDDF	Lufthansa	
 SR_195T	LEBL	LSGG	Swissair	
 W6_483	LEBL	LRBS	Wizz Air	
 AB_215E	EDDN	LEIB	Air Berlin	
@@ -25229,7 +25229,7 @@ BV_2610	LIRF	LEGR	Blue Panorama Airlines
 TY_9138	LEVC	GCTS	Iberworld	
 AF_214F	LFPG	LEBL	Air France	
 LG_628	LEPA	ELLX	Luxair	
-LH_8271	GOOY	EDDF	Lufthansa Cargo	
+LH_8271	GOOY	EDDF	Lufthansa	
 HG_32H	EDDG	LEPA	Niki	
 HG_3230	EDDG	LEPA	Niki	
 HG_76Z	EDDN	LEPA	Niki	
@@ -25278,7 +25278,7 @@ JK_2625	LEMD	LEVC	Spanair
 TY_4503	GCRR	LEBL	Iberworld	
 HG_41G	EDDE	LEPA	Niki	
 HV_1658	LEIB	EHAM	Transavia Holland	
-LH_8268	EDDF	GOOY	Lufthansa Cargo	
+LH_8268	EDDF	GOOY	Lufthansa	
 4G_9601	UUWW	LEMD	Gazpromavia	
 4G_9602	LEMD	UUWW	Gazpromavia	
 UX_456	LLBG	LEBL	Air Europa	
@@ -25519,7 +25519,7 @@ HG_3232	EDDE	LEPA	Niki
 DR_5156	LFLL	LEPA	Air Mediterranee	
 DE_6010	EDDL	LEPA	Condor Flugdienst	
 NO_6427	LEIB	LIPE	Neos	
-LH_8264	EDDF	GOOY	Lufthansa Cargo	
+LH_8264	EDDF	GOOY	Lufthansa	
 NO_6245	LEIB	LIPX	Neos	
 BY_1617	LEPA	EGAA	Thomsonfly	
 MT_48CM	LEAL	EGCC	Thomas Cook Airlines	
@@ -26401,7 +26401,7 @@ MT_94Y	EBOS	LEPA	Thomas Cook Airlines
 YW_8903	LEIB	LEAL	Air Nostrum	
 MT_4810	EBLG	LEPA	Thomas Cook Airlines	
 AB_3247	LEIB	EDDH	Air Berlin	
-LH_8256	EDDF	GOOY	Lufthansa Cargo	
+LH_8256	EDDF	GOOY	Lufthansa	
 YW_8670	LEPA	LESA	Air Nostrum	
 FR_058	LEAL	ENRY	Ryanair	
 JK_5696	LEMD	LEMH	Spanair	
@@ -35874,35 +35874,35 @@ RF_772	KMIA	KLAX	Florida West International Airways
 2P_798	RPMC	VHHH	Air Philippines	
 2P_799	VHHH	RPMC	Air Philippines	
 2P_822	ZSPD	RPVK	Air Philippines	
-LH_8163	KJFK	EDDF	Lufthansa Cargo	
-LH_8189	KORD	EDDF	Lufthansa Cargo	
-LH_8204	EDDF	KATL	Lufthansa Cargo	
-LH_8205	KATL	EDDF	Lufthansa Cargo	
-LH_8210	EDDF	KDFW	Lufthansa Cargo	
-LH_8265	SBKP	EDDF	Lufthansa Cargo	
-LH_8266	EDDF	SBKP	Lufthansa Cargo	
-LH_8272	EDDF	GOOY	Lufthansa Cargo	
-LH_8273	TJBQ	EHAM	Lufthansa Cargo	
-LH_8300	EDDF	LTBA	Lufthansa Cargo	
-LH_8382	EDDF	RJBB	Lufthansa Cargo	
-LH_8384	EDDF	RJAA	Lufthansa Cargo	
-LH_8385	RJAA	EDDF	Lufthansa Cargo	
-LH_8393	ZSPD	EDDF	Lufthansa Cargo	
-LH_8398	EDDF	ZGGG	Lufthansa Cargo	
-LH_8412	EDDF	VOMM	Lufthansa Cargo	
-LH_8413	VOBG	EDDF	Lufthansa Cargo	
-LH_8414	EDDF	VOHY	Lufthansa Cargo	
-LH_8417	VOMM	EDDF	Lufthansa Cargo	
-LH_8454	EDDF	VHHH	Lufthansa Cargo	
-LH_8455	VHHH	EDDF	Lufthansa Cargo	
-LH_8456	EDDF	VHHH	Lufthansa Cargo	
-LH_8457	VHHH	EDDF	Lufthansa Cargo	
-LH_8460	EDDF	VHHH	Lufthansa Cargo	
-LH_8461	VHHH	EDDF	Lufthansa Cargo	
-LH_8462	EDDF	VIDP	Lufthansa Cargo	
-LH_8463	VHHH	EDDF	Lufthansa Cargo	
-LH_8464	EDDF	VHHH	Lufthansa Cargo	
-LH_8469	VHHH	EDDF	Lufthansa Cargo	
+LH_8163	KJFK	EDDF	Lufthansa	
+LH_8189	KORD	EDDF	Lufthansa	
+LH_8204	EDDF	KATL	Lufthansa	
+LH_8205	KATL	EDDF	Lufthansa	
+LH_8210	EDDF	KDFW	Lufthansa	
+LH_8265	SBKP	EDDF	Lufthansa	
+LH_8266	EDDF	SBKP	Lufthansa	
+LH_8272	EDDF	GOOY	Lufthansa	
+LH_8273	TJBQ	EHAM	Lufthansa	
+LH_8300	EDDF	LTBA	Lufthansa	
+LH_8382	EDDF	RJBB	Lufthansa	
+LH_8384	EDDF	RJAA	Lufthansa	
+LH_8385	RJAA	EDDF	Lufthansa	
+LH_8393	ZSPD	EDDF	Lufthansa	
+LH_8398	EDDF	ZGGG	Lufthansa	
+LH_8412	EDDF	VOMM	Lufthansa	
+LH_8413	VOBG	EDDF	Lufthansa	
+LH_8414	EDDF	VOHY	Lufthansa	
+LH_8417	VOMM	EDDF	Lufthansa	
+LH_8454	EDDF	VHHH	Lufthansa	
+LH_8455	VHHH	EDDF	Lufthansa	
+LH_8456	EDDF	VHHH	Lufthansa	
+LH_8457	VHHH	EDDF	Lufthansa	
+LH_8460	EDDF	VHHH	Lufthansa	
+LH_8461	VHHH	EDDF	Lufthansa	
+LH_8462	EDDF	VIDP	Lufthansa	
+LH_8463	VHHH	EDDF	Lufthansa	
+LH_8464	EDDF	VHHH	Lufthansa	
+LH_8469	VHHH	EDDF	Lufthansa	
 GA_0857	VHHH	WRRR	Garuda Indonesia	
 GA_089	EHAM	WIII	Garuda Indonesia	
 GA_0899	ZGGG	WIII	Garuda Indonesia	
@@ -42222,7 +42222,7 @@ KL_96H	LFBO	EHAM	KLM Royal Dutch Airlines
 KL_96L	EDDM	EHAM	KLM Royal Dutch Airlines	
 KL_98C	LFBO	EHAM	KLM Royal Dutch Airlines	
 KL_99X	EHAM	EDDH	KLM Royal Dutch Airlines	
-LH_8270	EDDF	GOOY	Lufthansa Cargo	
+LH_8270	EDDF	GOOY	Lufthansa	
 AB_2347	GCRR	LEPA	Air Berlin	
 AB_36A	EDLP	LEPA	Air Berlin	
 AH_7000	DAAG	EGLL	Air Algerie	
@@ -43089,9 +43089,9 @@ ZT_016U	EGSS	EGPH	Titan Airways
 ZT_016V	EGPH	EGSS	Titan Airways	
 BY_132	EGCC	TBPB	Thomsonfly	
 U2_6853	EGPF	EHAM	EasyJet Airline	
-LH_8211	KDFW	EGCC	Lufthansa Cargo	
+LH_8211	KDFW	EGCC	Lufthansa	
 KL_761	EHAM	TNCB	KLM Royal Dutch Airlines	
-LH_8206	EDDF	CYYZ	Lufthansa Cargo	
+LH_8206	EDDF	CYYZ	Lufthansa	
 U2_843	EGKK	EGAA	EasyJet Airline	
 BY_697	HESH	EGCC	Thomsonfly	
 BY_247	GVBA	EGPF	Thomsonfly	
@@ -43150,7 +43150,7 @@ UG_2153	LEPA	EDDH	Tuninter
 R5_2371	GMTT	LEBL	Malta Air Charter	
 TP_828J	LPPT	LIRF	TAP Portugal	
 QI_501T	EKCH	LEMG	Cimber Air	
-LH_8276	EDDF	GOOY	Lufthansa Cargo	
+LH_8276	EDDF	GOOY	Lufthansa	
 HG_17Z	EDDN	LEPA	Niki	
 IB_0358	LEMD	LEAL	Iberia Airlines	
 YW_8246	LEVC	LEAS	Air Nostrum	
@@ -44386,7 +44386,7 @@ UG_8993	EFKS	LEMD	Tuninter
 PC_1136	LEZG	LEAL	Pegasus Airlines	
 YW_8981	LEVC	LEMD	Air Nostrum	
 W6_31Z	LHBP	LEBL	Wizz Air	
-LH_8257	GOOY	EDDF	Lufthansa Cargo	
+LH_8257	GOOY	EDDF	Lufthansa	
 IB_3762	LEMD	LTBA	Iberia Airlines	
 YW_8103	LEIB	LEPA	Air Nostrum	
 VY_3950	LEBL	LEPA	Vueling Airlines	
@@ -46703,7 +46703,7 @@ UX_1064	LIMC	LEMD	Air Europa
 AT_811F	EDDF	GMMN	Royal Air Maroc	
 JK_449	LEBL	LEMD	Spanair	
 ZI_726	DAOI	LFML	Aigle Azur	
-LH_8262	EDDF	GOOY	Lufthansa Cargo	
+LH_8262	EDDF	GOOY	Lufthansa	
 U2_3924	LEBL	LFPG	EasyJet Airline	
 U2_U561W	LIMC	FZFK	EasyJet Airline	
 AB_246M	GCFV	EDDF	Air Berlin	
@@ -46894,7 +46894,7 @@ AB_48E	LEPA	EDDT	Air Berlin
 VY_2373	LEGR	LEBL	Vueling Airlines	
 VY_1099	LEBL	LEMD	Vueling Airlines	
 IB_2225	LEBL	LEMD	Iberia Airlines	
-LH_8254	EDDF	GOOY	Lufthansa Cargo	
+LH_8254	EDDF	GOOY	Lufthansa	
 ST_9534	EDDM	GCTS	Germania	
 BY_3639	LEAL	EGCN	Thomsonfly	
 AZ_8413	LIRF	MDLR	Alitalia	
@@ -47319,7 +47319,7 @@ SK_4605	ENBR	EGCC	Scandinavian Airlines System
 BG_016	EGLL	EGCC	Biman Bangladesh Airlines	
 CX_683	VHHH	OMAA	Cathay Pacific	
 SV_706	OEMA	OERK	Saudi Arabian Airlines	
-LH_8207	KATL	EDDF	Lufthansa Cargo	
+LH_8207	KATL	EDDF	Lufthansa	
 BG_015	VGZR	EGLL	Biman Bangladesh Airlines	
 K4_246	EDDP	KJFK	Kalitta Air	
 TS_329	LFPG	CYUL	Air Transat	
@@ -47521,7 +47521,7 @@ U2_371	EGCC	EGAA	EasyJet Airline
 LS_6122	EGPF	ENGM	Jet2.com	
 WX_59C	EGLC	EGPH	CityJet	
 FX_9006	KMEM	KMHT	Federal Express	
-LH_8252	EDDF	GOOY	Lufthansa Cargo	
+LH_8252	EDDF	GOOY	Lufthansa	
 DE_234	EDDF	MDSD	Condor Flugdienst	
 DE_235	MROC	MDSD	Condor Flugdienst	
 S4_68	EKBI	LPMA	SATA International	
@@ -47568,7 +47568,7 @@ QF_5	YSSY	WSSS	Qantas
 MT_41WD	LOWS	EGGD	Thomas Cook Airlines	
 DE_484	EDDL	HEGN	Condor Flugdienst	
 AB_2541	LTAI	EDDP	Air Berlin	
-LH_8301	LTBA	EDDK	Lufthansa Cargo	
+LH_8301	LTBA	EDDK	Lufthansa	
 EI_647	LKPR	EIDW	Aer Lingus	
 AZ_814	LIRF	LLBG	Alitalia	
 AZ_815	LLBG	LIRF	Alitalia	
@@ -47808,7 +47808,7 @@ DY_24BA	LEAL	ENTO	Norwegian Air Shuttle
 TY_2762	LEXJ	LEAL	Iberworld	
 VY_3219	GCXO	LEBL	Vueling Airlines	
 DL_1162	KLAX	KJFK	Delta Air Lines	
-LH_8242	EDDF	KORD	Lufthansa Cargo	
+LH_8242	EDDF	KORD	Lufthansa	
 QF_7589	ZSPD	PANC	Qantas	
 UA_1111	KMSY	KIAH	United Airlines	
 UA_1493	KCLE	KMCO	United Airlines	
@@ -47917,7 +47917,7 @@ QR_557	HLLB	OTBD	Qatar Airways
 8Q_191	LTBA	LCEN	Onur Air	
 XQ_8109	LTAF	LTFJ	SunExpress	
 MT_2473	GBYD	EGCC	Thomas Cook Airlines	
-LH_8164	EDDK	KJFK	Lufthansa Cargo	
+LH_8164	EDDK	KJFK	Lufthansa	
 KK_041	LTFE	LTBA	Atlasjet	
 KK_042	LTBA	LTFE	Atlasjet	
 KK_043	LTFE	LTBA	Atlasjet	
@@ -48034,7 +48034,7 @@ TP_572	LPPT	EDDF	TAP Portugal
 VY_2973	LFRS	LEBL	Vueling Airlines	
 VY_2972	LEBL	LFRS	Vueling Airlines	
 AF_1479	EIDW	LFPG	Air France	
-LH_8188	EDDF	KORD	Lufthansa Cargo	
+LH_8188	EDDF	KORD	Lufthansa	
 U2_294H	LIMC	EGKK	EasyJet Airline	
 LS_2111	EGCC	LOWS	Jet2.com	
 LS_2112	LOWS	EGCC	Jet2.com	
@@ -48156,7 +48156,7 @@ UA_1634	KIAH	KPHX	United Airlines
 UA_1635	KSAN	KEWR	United Airlines	
 DE_369	VTSP	OMSJ	Condor Flugdienst	
 PC_552	LTAI	LTFJ	Pegasus Airlines	
-LH_8167	KIAH	KJFK	Lufthansa Cargo	
+LH_8167	KIAH	KJFK	Lufthansa	
 U2_225D	EGSS	LEBB	EasyJet Airline	
 AF_1478	LFPG	EIDW	Air France	
 4U_2465	EGLL	EDDS	Germanwings	
@@ -48743,7 +48743,7 @@ W6_1DQ	EGPK	EPGD	Wizz Air
 DY_6054	ENGM	EGPH	Norwegian Air Shuttle	
 RC_101	EGMC	EKVG	Atlantic Airways	
 LS_6055	EGPH	ENGM	Jet2.com	
-LH_8168	EDDF	KDTW	Lufthansa Cargo	
+LH_8168	EDDF	KDTW	Lufthansa	
 U2_6814	EGJJ	EGPF	EasyJet Airline	
 MT_15VX	GCTS	EGPF	Thomas Cook Airlines	
 BY_8AE	LCPH	EGNX	Thomsonfly	
@@ -52057,7 +52057,7 @@ SR_1578	LSZH	LOWW	Swissair
 SR_1574	LSZH	LOWW	Swissair	
 SR_214X	LSZH	LEVC	Swissair	
 AB_409A	EDDT	GCRR	Air Berlin	
-LH_8241	MMMX	KDFW	Lufthansa Cargo	
+LH_8241	MMMX	KDFW	Lufthansa	
 AB_907C	GCFV	GCLP	Air Berlin	
 KE_927	RKSI	LIMC	Korean Air	
 AZ_1708	LICC	LIRN	Alitalia	
@@ -52162,7 +52162,7 @@ SK_690	LIML	ESSA	Scandinavian Airlines System
 UA_839	KLAX	YSSY	United Airlines	
 QF_407	YSSY	YMML	Qantas	
 QF_401	YSSY	YMML	Qantas	
-LH_8381	ZBAA	UNKL	Lufthansa Cargo	
+LH_8381	ZBAA	UNKL	Lufthansa	
 DR_7848	GVBA	LFRS	Air Mediterranee	
 DE_264	EDDF	HKMO	Condor Flugdienst	
 XQ_185	EDDL	EDDM	SunExpress	
@@ -52697,8 +52697,8 @@ TS_719	LPPT	CYUL	Air Transat
 TS_141	MDPC	CYYZ	Air Transat	
 TS_319	LFPG	CYUL	Air Transat	
 AB_586	EDDS	EDDL	Air Berlin	
-LH_8470	EDDF	OERK	Lufthansa Cargo	
-LH_8410	EDDF	VOMM	Lufthansa Cargo	
+LH_8470	EDDF	OERK	Lufthansa	
+LH_8410	EDDF	VOMM	Lufthansa	
 AB_7408	EDDL	TNCC	Air Berlin	
 AB_7434	EDDM	MDLR	Air Berlin	
 3V_54S	VHHH	EBLG	TNT Airways	
@@ -65836,7 +65836,7 @@ DL_614	LFPG	KSEA	Delta Air Lines
 U2_42K	EGGD	EGPH	EasyJet Airline	
 CJ_89U	EGLC	EGPF	BA CityFlyer	
 DL_89	KSLC	LFPG	Delta Air Lines	
-LH_8221	KDFW	EDDF	Lufthansa Cargo	
+LH_8221	KDFW	EDDF	Lufthansa	
 KE_9560	KORD	EBBR	Korean Air	
 BY_137	KSFB	EGPF	Thomsonfly	
 DY_2NU	ENGM	EIDW	Norwegian Air Shuttle	
@@ -65916,7 +65916,7 @@ BA_8701	EGPH	EGLC	British Airways
 U2_016	EGGW	EGPH	EasyJet Airline	
 U2_83B	EGKK	EGPF	EasyJet Airline	
 DL_264	KMSP	EHAM	Delta Air Lines	
-LH_8173	KATL	EDDF	Lufthansa Cargo	
+LH_8173	KATL	EDDF	Lufthansa	
 AF_077D	KLAX	LFPG	Air France	
 LS_149	EGPF	LEBL	Jet2.com	
 LS_150	LEBL	EGPF	Jet2.com	
@@ -68535,7 +68535,7 @@ W6_8802	EICK	EPWR	Wizz Air
 ZB_5485	LIPZ	EGBB	Monarch Airlines	
 ZB_3566	EGGW	LIRF	Monarch Airlines	
 BY_6FE	EGCN	LPFR	Thomsonfly	
-LH_8161	KJFK	EDDF	Lufthansa Cargo	
+LH_8161	KJFK	EDDF	Lufthansa	
 ZB_1377	LIPZ	EGCC	Monarch Airlines	
 ZB_1376	EGCC	LIPZ	Monarch Airlines	
 MT_244C	EBBR	GCLP	Thomas Cook Airlines	
@@ -68746,7 +68746,7 @@ MT_26WP	EGNX	DTNZ	Thomas Cook Airlines
 LS_17E	EGPH	EGNX	Jet2.com	
 LS_17F	EGNX	EGPH	Jet2.com	
 LY_613	UUDD	EINN	El Al Israel Airlines	
-LH_8172	EDDF	CYYZ	Lufthansa Cargo	
+LH_8172	EDDF	CYYZ	Lufthansa	
 BY_8646	EGCC	ENDU	Thomsonfly	
 LS_432	LHBP	EGNM	Jet2.com	
 BA_19W	EGPD	EGLL	British Airways	
@@ -71093,7 +71093,7 @@ SK_6408	EGCC	ENGM	Scandinavian Airlines System
 RC_7242	EIDW	ENVA	Atlantic Airways	
 TF_923	ESGG	EGPH	Malmö Aviation	
 TF_1428	EGPH	ESGG	Malmö Aviation	
-LH_8220	EDDF	KORD	Lufthansa Cargo	
+LH_8220	EDDF	KORD	Lufthansa	
 U2_9032	EGGW	EGPF	EasyJet Airline	
 HG_3087	LEMD	LOWW	Niki	
 ZI_705	LFML	DAAG	Aigle Azur	
@@ -71270,7 +71270,7 @@ DY_43PF	GCLP	ENVA	Norwegian Air Shuttle
 HV_8254	KBFI	BIKF	Transavia Holland	
 U2_1AT	EGGW	EGPH	EasyJet Airline	
 BY_8BT	EGPF	LPFR	Thomsonfly	
-LH_8196	EDDF	KDTW	Lufthansa Cargo	
+LH_8196	EDDF	KDTW	Lufthansa	
 BA_9279	EGPH	EGKK	British Airways	
 KM_7385	LEMD	LMML	Air Malta	
 AB_97A	LFSB	LEPA	Air Berlin	
@@ -71451,7 +71451,7 @@ MT_103D	GCRR	EBBR	Thomas Cook Airlines
 JP_247	BIKF	LJLJ	Adria Airways	
 UA_1883	KRIV	EDFH	United Airlines	
 SQ_7903	KDFW	EBBR	Singapore Airlines Cargo	
-LH_8222	EDDF	KORD	Lufthansa Cargo	
+LH_8222	EDDF	KORD	Lufthansa	
 FX_9738	EGSS	SVMI	Federal Express	
 AA_1869	KMIA	KORD	American Airlines	
 AC_130	CYYC	CYYZ	Air Canada	
@@ -71674,12 +71674,12 @@ MT_7925	LTBS	EGFF	Thomas Cook Airlines
 BA_273G	EGKK	EGPH	British Airways	
 MT_49PM	LEPA	EGPF	Thomas Cook Airlines	
 BY_644F	EGPF	EGBB	Thomsonfly	
-LH_8230	EDDF	KORD	Lufthansa Cargo	
+LH_8230	EDDF	KORD	Lufthansa	
 MT_601F	EGNT	EGCC	Thomas Cook Airlines	
 MT_8550	EGPD	LTBS	Thomas Cook Airlines	
 W8_1892	EDDK	CYHM	Cargojet Airways	
 WW_08Q	EGNX	EGPF	bmibaby	
-LH_8170	EDDF	KATL	Lufthansa Cargo	
+LH_8170	EDDF	KATL	Lufthansa	
 MT_46CZ	GCTS	EGPF	Thomas Cook Airlines	
 CJ_71R	EGLC	EGPH	BA CityFlyer	
 DY_1357	EGPH	ENBR	Norwegian Air Shuttle	
@@ -71718,7 +71718,7 @@ AB_69H	LEPA	EDDH	Air Berlin
 AB_34V	EDDP	LEPA	Air Berlin	
 VY_6567	LIRN	LEBL	Vueling Airlines	
 AT_930E	GMMN	LSGG	Royal Air Maroc	
-LH_8250	EDDF	GOOY	Lufthansa Cargo	
+LH_8250	EDDF	GOOY	Lufthansa	
 LG_7894	LEIB	ELLX	Luxair	
 TK_844	LTBA	LTAC	Turkish Airlines	
 TK_845	ORBB	LTAC	Turkish Airlines	
@@ -73109,9 +73109,9 @@ DR_1242	LFRS	LFPG	Air Mediterranee
 LS_181	EGPF	LGRP	Jet2.com	
 WE_4852	KMIA	EHAM	Centurion Air Cargo	
 AB_7498	EDDL	KLAS	Air Berlin	
-LH_8231	KLAX	EDDF	Lufthansa Cargo	
-LH_8171	KATL	EDDF	Lufthansa Cargo	
-LH_8197	KDFW	EDDF	Lufthansa Cargo	
+LH_8231	KLAX	EDDF	Lufthansa	
+LH_8171	KATL	EDDF	Lufthansa	
+LH_8197	KDFW	EDDF	Lufthansa	
 MT_23WQ	EGNT	LGKO	Thomas Cook Airlines	
 HG_2764	EGPH	LOWW	Niki	
 ST_3326	EDJA	GCRR	Germania	
@@ -76007,7 +76007,7 @@ WW_94Pk	EGNX	LEBL	bmibaby
 UA_164	LFPG	KIAH	United Airlines	
 BV_1346	LIRF	MNMG	Blue Panorama Airlines	
 BV_1504	LIRF	MUCU	Blue Panorama Airlines	
-LH_8166	EDDF	KJFK	Lufthansa Cargo	
+LH_8166	EDDF	KJFK	Lufthansa	
 5X_108	KEWR	PANC	United Parcel Service	
 HV_776	LGIR	LGKO	Transavia Holland	
 SU_2013	LKPR	UUEE	Aeroflot Russian Airlines	
@@ -77180,7 +77180,7 @@ VS_93	EGKK	MMUN	Virgin Atlantic Airways
 VY_7223	EGFF	LEBL	Vueling Airlines	
 W6_16U	EICK	EPWR	Wizz Air	
 W6_7KV	EICK	EYVI	Wizz Air	
-LH_8223	MMMX	KDFW	Lufthansa Cargo	
+LH_8223	MMMX	KDFW	Lufthansa	
 MP_1158	SCEL	SEQU	Martinair	
 PG_805	VTBS	VTSM	Bangkok Airways	
 CX_043	VHHH	VOMM	Cathay Pacific	
@@ -77389,7 +77389,7 @@ UA_905	LTBA	KEWR	United Airlines
 VS_43A	EGKK	KLAS	Virgin Atlantic Airways	
 W6_128	EPGD	EICK	Wizz Air	
 W6_1LL	EPPO	EICK	Wizz Air	
-LH_8277	TJBQ	EHAM	Lufthansa Cargo	
+LH_8277	TJBQ	EHAM	Lufthansa	
 KL_765	EHAM	TNCB	KLM Royal Dutch Airlines	
 TS_189	LFPG	CYUL	Air Transat	
 UA_009	EGLL	KEWR	United Airlines	
@@ -78468,7 +78468,7 @@ QS_2047	LEAM	LKTB	Travel Service
 TY_8466	GCFV	LEBL	Iberworld	
 UX_1935	LEAB	LEIB	Air Europa	
 MS_2753	HECA	LEMD	Egyptair	
-LH_8367	OMSJ	EDDF	Lufthansa Cargo	
+LH_8367	OMSJ	EDDF	Lufthansa	
 YW_8183	LEVC	LEBL	Air Nostrum	
 UG_10V	LEPA	EDDH	Tuninter	
 DR_2190	LFLL	DAAG	Air Mediterranee	
@@ -78524,7 +78524,7 @@ IB_3142	LEMD	UUDD	Iberia Airlines
 IB_3143	UUDD	LEMD	Iberia Airlines	
 IB_3148	LEMD	LKPR	Iberia Airlines	
 IB_3149	LKPR	LEMD	Iberia Airlines	
-LH_8200	EDDF	KDFW	Lufthansa Cargo	
+LH_8200	EDDF	KDFW	Lufthansa	
 BA_8043	EGPH	EGLL	British Airways	
 W6_7PC	EGGP	EYVI	Wizz Air	
 MT_58TH	EGNT	LGIR	Thomas Cook Airlines	
@@ -80032,7 +80032,7 @@ VY_2252	LEBL	LEZL	Vueling Airlines
 MT_400F	GCTS	LEPA	Thomas Cook Airlines	
 AB_444K	LEAL	LEPA	Air Berlin	
 AB_227P	EDDV	LEPA	Air Berlin	
-LH_8259	GOOY	EDDF	Lufthansa Cargo	
+LH_8259	GOOY	EDDF	Lufthansa	
 MT_64RH	EGCC	LEPA	Thomas Cook Airlines	
 AZ_8321	LEVC	LIRF	Alitalia	
 AZ_8323	LEVC	LIMC	Alitalia	
@@ -80604,9 +80604,9 @@ J8_260	WMSA	WMKC	Berjaya Air
 J8_261	WMKC	WMSA	Berjaya Air	
 J8_262	WMSA	WMKC	Berjaya Air	
 J8_263	WMKC	WMSA	Berjaya Air	
-LH_8340	EDDF	LLBG	Lufthansa Cargo	
-LH_8342	EDDF	LLBG	Lufthansa Cargo	
-LH_8343	LLBG	EDDF	Lufthansa Cargo	
+LH_8340	EDDF	LLBG	Lufthansa	
+LH_8342	EDDF	LLBG	Lufthansa	
+LH_8343	LLBG	EDDF	Lufthansa	
 NH_1009	KJFK	RJAA	ANA All Nippon Airways	
 NH_1010	RJAA	KJFK	ANA All Nippon Airways	
 OL_351	EDDC	EGMC	Ostfriesische Lufttransport	
@@ -80811,7 +80811,7 @@ U2_679K	EDDB	LEMD	EasyJet Airline
 IB_33AD	LIRF	LEMD	Iberia Airlines	
 MT_610P	GCLP	LEPA	Thomas Cook Airlines	
 VY_3909	LEPA	LEBL	Vueling Airlines	
-LH_8260	EDDF	GOOY	Lufthansa Cargo	
+LH_8260	EDDF	GOOY	Lufthansa	
 VY_8022	LEBL	LFPO	Vueling Airlines	
 VY_8023	LFPO	LEBL	Vueling Airlines	
 U2_72HC	LEMD	EDDB	EasyJet Airline	
@@ -81374,7 +81374,7 @@ AF_055	KIAD	LFPG	Air France
 AV_244	SKBO	KJFK	Avianca - Aerovias Nacionales de Colombia	
 DL_0052	KLAX	KJFK	Delta Air Lines	
 FX_522	KMEM	KICT	Federal Express	
-LH_8203	KDFW	EGCC	Lufthansa Cargo	
+LH_8203	KDFW	EGCC	Lufthansa	
 TP_2574	KEWR	LPPT	TAP Portugal	
 VS_114	KJFK	EGLL	Virgin Atlantic Airways	
 VS_22W	KIAD	EGLL	Virgin Atlantic Airways	
@@ -82009,7 +82009,7 @@ DE_2895	GCFV	EDDL	Condor Flugdienst
 UG_65K	GVAC	EDDF	Tuninter	
 4U_2261	EDDS	GCLP	Germanwings	
 UG_6250	LFSB	GMAD	Tuninter	
-LH_8202	EDDF	KDTW	Lufthansa Cargo	
+LH_8202	EDDF	KDTW	Lufthansa	
 U2_381	EGPF	EGAA	EasyJet Airline	
 BA_1311	EGPD	EGLL	British Airways	
 U2_189A	BIKF	EGGW	EasyJet Airline	
@@ -87904,8 +87904,8 @@ MN_754	FALE	FAPE	Comair
 MN_755	FACT	FAPE	Comair	
 EY_601	FACT	FAJS	Etihad Airways	
 EY_602	OMAA	FAJS	Etihad Airways	
-LH_8296	EDDF	HKJK	Lufthansa Cargo	
-LH_8297	FAJS	HKJK	Lufthansa Cargo	
+LH_8296	EDDF	HKJK	Lufthansa	
+LH_8297	FAJS	HKJK	Lufthansa	
 IB_6050	FAJS	LEMD	Iberia Airlines	
 IB_6051	LEBL	LEMD	Iberia Airlines	
 MH_201	WMKK	FACT	Malaysia Airlines	
@@ -87949,10 +87949,10 @@ UN_8738	EINN	UUDD	Transaero Airlines
 U2_132N	EGSS	EGPF	EasyJet Airline	
 CZ_679	ZBAA	ZWWW	China Southern Airlines	
 CZ_680	LTBA	ZWWW	China Southern Airlines	
-LH_8341	LLBG	LTBA	Lufthansa Cargo	
-LH_8292	EDDF	LTBA	Lufthansa Cargo	
-LH_8274	EDDF	GOOY	Lufthansa Cargo	
-LH_8275	SBKP	GOOY	Lufthansa Cargo	
+LH_8341	LLBG	LTBA	Lufthansa	
+LH_8292	EDDF	LTBA	Lufthansa	
+LH_8274	EDDF	GOOY	Lufthansa	
+LH_8275	SBKP	GOOY	Lufthansa	
 VS_944	KLAS	EGCC	Virgin Atlantic Airways	
 VS_943	EGKK	EGCC	Virgin Atlantic Airways	
 U2_704U	EGAA	LMML	EasyJet Airline	
@@ -87972,7 +87972,7 @@ U2_862P	EGSS	LEAL	EasyJet Airline
 BA_541	LIPE	EGLL	British Airways	
 U2_904R	LEMD	EGGW	EasyJet Airline	
 U2_478N	LSGG	EGGD	EasyJet Airline	
-LH_8293	HECA	EDDF	Lufthansa Cargo	
+LH_8293	HECA	EDDF	Lufthansa	
 U2_321A	EGSS	LSGG	EasyJet Airline	
 U2_843X	EGSS	LFLL	EasyJet Airline	
 UN_355	UUDD	LIMC	Transaero Airlines	
@@ -88161,7 +88161,7 @@ U2_6VD	LFBO	EGGD	EasyJet Airline
 U2_730B	EGGW	LPPT	EasyJet Airline	
 U2_817L	EGGD	LEBL	EasyJet Airline	
 U2_866H	EGGD	LFBO	EasyJet Airline	
-LH_8261	TJBQ	EDDF	Lufthansa Cargo	
+LH_8261	TJBQ	EDDF	Lufthansa	
 DY_9GR	EFHK	GCTS	Norwegian Air Shuttle	
 MT_21FV	GCFV	EGGD	Thomas Cook Airlines	
 MT_32HL	GCTS	EGGD	Thomas Cook Airlines	
@@ -90082,11 +90082,11 @@ VY_4644	LEVC	LEZL	Vueling Airlines
 W6_2MN	LHBP	LEMD	Wizz Air	
 DR_4322	LFPG	DAAG	Air Mediterranee	
 T3_41N	EGPD	EGNT	Eastern Airways	
-LH_8499	VTBS	VIDP	Lufthansa Cargo	
-LH_8258	EDDF	GOOY	Lufthansa Cargo	
-LH_8403	ZSPD	UNKL	Lufthansa Cargo	
+LH_8499	VTBS	VIDP	Lufthansa	
+LH_8258	EDDF	GOOY	Lufthansa	
+LH_8403	ZSPD	UNKL	Lufthansa	
 5C_574	EBLG	EDDF	CAL Cargo Air Lines	
-LH_8365	VOHY	OMSJ	Lufthansa Cargo	
+LH_8365	VOHY	OMSJ	Lufthansa	
 TK_6502	DGAA	EHBK	Turkish Airlines	
 TK_1YH	LTBA	EGKK	Turkish Airlines	
 TK_8DT	LTBA	EGKK	Turkish Airlines	
@@ -90114,7 +90114,7 @@ W6_2TW	EPGD	EGGP	Wizz Air
 W6_670	LFOB	LBSF	Wizz Air	
 W6_362	LRTR	LEBL	Wizz Air	
 AT_694T	GMMW	EDDF	Royal Air Maroc	
-LH_8311	LIPO	EDDF	Lufthansa Cargo	
+LH_8311	LIPO	EDDF	Lufthansa	
 UG_6732	EDDL	HEGN	Tuninter	
 HV_6974	LOWS	EHEH	Transavia Holland	
 AB_1194	EDDM	MYNN	Air Berlin	
@@ -90234,8 +90234,8 @@ QR_948	LDZA	LHBP	Qatar Airways
 OR_0381	EHAM	LFSB	Arkefly	
 CI_5621	RCTP	OMAA	China Airlines	
 OR_0979	EHAM	HESH	Arkefly	
-LH_8400	EDDF	UNKL	Lufthansa Cargo	
-LH_8267	SAEZ	GOOY	Lufthansa Cargo	
+LH_8400	EDDF	UNKL	Lufthansa	
+LH_8267	SAEZ	GOOY	Lufthansa	
 T3_32X	EGGD	EGNM	Eastern Airways	
 T3_36X	EGGD	EGNM	Eastern Airways	
 BY_1FB	EGNM	GCTS	Thomsonfly	
@@ -90306,7 +90306,7 @@ AF_439B	MMMX	LFPG	Air France
 WX_72X	LFPG	EIDW	CityJet	
 AB_7198	EDDM	TBPB	Air Berlin	
 TX_520	LFPO	TNCM	Air Caraïbes	
-LH_8263	TJBQ	EDDF	Lufthansa Cargo	
+LH_8263	TJBQ	EDDF	Lufthansa	
 RE_3632	EINN	EGBB	Aer Arann	
 RE_88DR	EIDW	EGGD	Aer Arann	
 VS_017	EGLL	KEWR	Virgin Atlantic Airways	
@@ -95787,7 +95787,7 @@ U2_82WK	LEIB	LIMC	EasyJet Airline
 HV_2572	GMMW	EHAM	Transavia Holland	
 V3_4236	LIME	LEMD	Carpatair	
 V3_4237	LEMD	LIME	Carpatair	
-LH_8253	SBKP	EDDF	Lufthansa Cargo	
+LH_8253	SBKP	EDDF	Lufthansa	
 MT_9846	EBBR	LEVC	Thomas Cook Airlines	
 W6_1324	EGPF	EPWA	Wizz Air	
 LS_4004	BIKF	EGNT	Jet2.com	
@@ -96762,7 +96762,7 @@ MT_399F	EGKK	LEPA	Thomas Cook Airlines
 AT_783K	LFPO	GMME	Royal Air Maroc	
 EK_72	LEMD	OTBD	Emirates Airlines	
 MT_7315	LEPA	EGGD	Thomas Cook Airlines	
-LH_8225	KIAH	EDDF	Lufthansa Cargo	
+LH_8225	KIAH	EDDF	Lufthansa	
 LS_4018	ULLI	EGNM	Jet2.com	
 ST_2424	EDDW	EGPH	Germania	
 LS_570	LDDU	EGNT	Jet2.com	
@@ -99734,7 +99734,7 @@ EI_955	LEPA	EGAC	Aer Lingus
 DY_6VP	ENGM	LEMG	Norwegian Air Shuttle	
 BY_28E	EGPF	LEPA	Thomsonfly	
 EI_028	EGAC	EGKK	Aer Lingus	
-LH_88	EDDF	KORD	Lufthansa Cargo	
+LH_88	EDDF	KORD	Lufthansa	
 BE_8314	EGKK	EGAC	Flybe	
 T3_9501	EGPD	EIDL	Eastern Airways	
 SK_9115	ESSA	EINN	Scandinavian Airlines System	
@@ -99754,7 +99754,7 @@ RE_3909	EIDW	EGPF	Aer Arann
 BE_9917	EGPH	LERS	Flybe	
 LS_713Q	EGNH	EGAA	Jet2.com	
 SK_9274	EINN	ENGM	Scandinavian Airlines System	
-LH_62	EDDF	KJFK	Lufthansa Cargo	
+LH_62	EDDF	KJFK	Lufthansa	
 BE_347	EGPF	EGCC	Flybe	
 FX_27	EDDF	KMEM	Federal Express	
 MT_32LQ	LGKF	EGNT	Thomas Cook Airlines	
@@ -100286,8 +100286,8 @@ EI_533	LFBO	EIDW	Aer Lingus
 EI_58R	LEMG	EIDW	Aer Lingus	
 EI_7D8	EIDW	LEBB	Aer Lingus	
 U2_64LG	EGGD	EPKK	EasyJet Airline	
-LH_60	EDDF	KJFK	Lufthansa Cargo	
-LH_89	KORD	EDDF	Lufthansa Cargo	
+LH_60	EDDF	KJFK	Lufthansa	
+LH_89	KORD	EDDF	Lufthansa	
 MS_996	CYYZ	HECA	Egyptair	
 8Q_873	LTBS	EGTE	Onur Air	
 8Q_874	EGTE	LTBS	Onur Air	
@@ -101094,7 +101094,7 @@ UA_1888	KBWI	ETAR	United Airlines
 DL_98	KDTW	LFPG	Delta Air Lines	
 BJ_8402	DTNZ	EGPF	Nouvel Air Tunisie	
 U2_90BC	EGAA	EGKK	EasyJet Airline	
-LH_8224	EDDF	KORD	Lufthansa Cargo	
+LH_8224	EDDF	KORD	Lufthansa	
 BE_584	EGFF	EGPH	Flybe	
 XQ_32J	LTAI	EDDF	SunExpress	
 XQ_6170	LTAI	EDDF	SunExpress	
@@ -101199,7 +101199,7 @@ CJ_85M	LIPZ	EGPF	BA CityFlyer
 VY_4537	EGPH	LEBL	Vueling Airlines	
 LS_273M	EGNM	LEAL	Jet2.com	
 CJ_14F	LEMG	EGPD	BA CityFlyer	
-LH_8399	RKSI	UNKL	Lufthansa Cargo	
+LH_8399	RKSI	UNKL	Lufthansa	
 W6_32G	EGPF	EPGD	Wizz Air	
 AG_455J	EIDW	LGIR	Air Contractors	
 ZB_752	EGKK	LTBS	Monarch Airlines	
@@ -109387,8 +109387,8 @@ ET_710	HAAB	EGLL	Ethiopian Airlines
 U2_10KF	EDDB	EGCC	EasyJet Airline	
 U2_35VB	EGCC	EHAM	EasyJet Airline	
 U2_1973	EGCC	LCPH	EasyJet Airline	
-LH_8160	EDDF	KJFK	Lufthansa Cargo	
-LH_8278	EDDF	SBKP	Lufthansa Cargo	
+LH_8160	EDDF	KJFK	Lufthansa	
+LH_8278	EDDF	SBKP	Lufthansa	
 KL_1094	EGCC	EHAM	KLM Royal Dutch Airlines	
 BY_56C	LCPH	EGCC	Thomsonfly	
 BE_8TJ	EGHQ	EGKK	Flybe	
@@ -109922,7 +109922,7 @@ W6_26D	EPWA	EGPF	Wizz Air
 J7_3421	EHBK	EGNT	Denim Air 	
 J7_342A	EGNT	EGPF	Denim Air 	
 BE_3JZ	EGPF	EGNX	Flybe	
-LH_8383	RJAA	UNKL	Lufthansa Cargo	
+LH_8383	RJAA	UNKL	Lufthansa	
 NO_490	LIMC	GCLP	Neos	
 NO_491	GCLP	GCFV	Neos	
 8Q_1310	LFLL	LFPG	Onur Air	
@@ -110679,7 +110679,7 @@ U2_84VE	EGKK	LPPR	EasyJet Airline
 U2_89YG	EGGW	LEMD	EasyJet Airline	
 UG_9006	EDDH	MMUN	Tuninter	
 UG_9007	MMUN	EDDH	Tuninter	
-LH_8165	KIAH	EGCC	Lufthansa Cargo	
+LH_8165	KIAH	EGCC	Lufthansa	
 CV_775D	KSEA	EGPK	Cargolux	
 CJ_9768	EGBB	EGPF	BA CityFlyer	
 UA_56	LFPG	KEWR	United Airlines	
