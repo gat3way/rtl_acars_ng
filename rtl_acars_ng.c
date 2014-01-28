@@ -92,6 +92,7 @@ struct mstat_s {
 	int ind;
 	unsigned short crc;
 	char txt[243];
+	unsigned char c1,c2,c3;
 } mstat[2];
 
 
@@ -103,7 +104,7 @@ struct acars_flight {
 	char *to;
 	char *airline;
 };
-struct acars_flight acars_flights[256000];
+struct acars_flight acars_flights[160000];
 
 
 struct acars_aircraft {
@@ -112,7 +113,7 @@ struct acars_aircraft {
 	char *manufacturer;
 	char *model;
 };
-struct acars_aircraft acars_aircrafts[512000];
+struct acars_aircraft acars_aircrafts[500000];
 
 
 struct acars_airport {
@@ -132,13 +133,14 @@ struct acars_ml {
 
 struct acars_ml acars_mls[16000];
 
+/*
 struct acars_airlines {
 	char *al_code;
 	char *al_label;
 };
 
 struct acars_airlines acars_airliness[16000];
-
+*/
 
 
 
@@ -739,14 +741,15 @@ int bitsdiff(unsigned char src, unsigned char dst)
 
 
 int getmesg(unsigned char r, msg_t * msg, int ch) {
+	unsigned short mcrc;
+	unsigned char mtxt[256];
 	struct mstat_s *st;
 	st = &(mstat[ch]);
 
 	do {
 		switch (st->state) {
 		case HEADL:
-			//if (r == 0xff) {
-			if (bitsdiff(r,0xff)<1) {
+			if (r == 0xff) {
 				st->state = HEADF;
 				return 8;
 			}
@@ -806,6 +809,7 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 			return 8;
 		case TXT:
 			update_crc(&st->crc, r);
+			st->c1 = r;
 			r = r & 0x7f;
 			if (r == 0x03 || r == 0x17) {
 				st->state = CRC1;
@@ -820,10 +824,12 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 			return 8;
 		case CRC1:
 			update_crc(&st->crc, r);
+			st->c2 = r;
 			st->state = CRC2;
 			return 8;
 		case CRC2:
 			update_crc(&st->crc, r);
+			st->c3 = r;
 			st->state = END;
 			return 8;
 		case END:
@@ -834,14 +840,62 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 				return 0;
 			}
 			else {
-				msg->crc = 1;
-				build_mesg(st->txt, st->ind, msg);
 				// Do some heuristic checks
 				if (msg->addr[7]!=0) {st->state = HEADL;return 8;}
 				int a;
 				for (a=0;a<8;a++) if ((msg->addr[a]<32)&&(msg->addr[a]>127)) {st->state = HEADL;return 8;}
 				for (a=0;a<6;a++) if ((msg->fid[a]<32)&&(msg->fid[a]>127)) {st->state = HEADL;return 8;}
-				return 0;
+				int c1,c2,c3,c4,c5,c6;
+				msg->crc = 1;
+
+				// Correct CRC, single bit error
+				for (c1=0;c1<st->ind;c1++)
+				for (c2=0;c2<8;c2++)
+				{
+				    mcrc = 0;
+				    memset(mtxt,0,256);
+				    for (c3=0;c3<st->ind;c3++)
+				    {
+				        if (c1==c3) {update_crc(&mcrc,st->txt[c3]^(1<<c2));mtxt[c3]=(st->txt[c3]^(1<<c2));}
+				        else {update_crc(&mcrc,st->txt[c3]);mtxt[c3]=st->txt[c3];}
+				    }
+				    update_crc(&mcrc, st->c1);
+				    update_crc(&mcrc, st->c2);
+				    update_crc(&mcrc, st->c3);
+				    if (mcrc==0) 
+				    {
+					memcpy(st->txt,mtxt,st->ind);
+					build_mesg(st->txt, st->ind, msg);
+					return 0;
+				    }
+				}
+				// Correct CRC, two bit error
+				memset(mtxt,0,256);
+				for (c1=0;c1<st->ind;c1++)
+				{
+				for (c2=0;c2<8;c2++)
+				for (c4=0;c4<st->ind;c4++)
+				for (c5=0;c5<8;c5++)
+				{
+				    mcrc = 0;
+				    for (c3=0;c3<st->ind;c3++)
+				    {
+				        if (c1==c3) {update_crc(&mcrc,st->txt[c3]^(1<<c2));mtxt[c3]=(st->txt[c3]^(1<<c2));}
+				        else if (c4==c3) {update_crc(&mcrc,st->txt[c3]^(1<<c5));mtxt[c3]=(st->txt[c3]^(1<<c5));}
+				        else {update_crc(&mcrc,st->txt[c3]);mtxt[c3]=st->txt[c3];}
+				    }
+				    update_crc(&mcrc, st->c1);
+				    update_crc(&mcrc, st->c2);
+				    update_crc(&mcrc, st->c3);
+				    if (mcrc==0) 
+				    {
+					memcpy(st->txt,mtxt,st->ind);
+					build_mesg(st->txt, st->ind, msg);
+					return 0;
+				    }
+				}
+				}
+				return 8;
 			}
 			return 8;
 		}
@@ -925,137 +979,137 @@ void process_5u(char *txt)
 
 void process_q1(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("OUT event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
-    printf("OFF event occured at: %c%c:%c%c\n",txt[7],txt[8],txt[9],txt[10]);
-    printf("ON event occured at: %c%c:%c%c\n",txt[11],txt[12],txt[13],txt[14]);
-    printf("IN event occured at: %c%c:%c%c\n",txt[15],txt[16],txt[17],txt[18]);
-    printf("Fuel: %c%c%c%c\n",txt[19],txt[20],txt[21],txt[22]);
-    printf("Destination station: %c%c%c\n",txt[23],txt[24],txt[25]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("OUT event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("OFF event occured at: %c%c:%c%c\n",txt[8],txt[9],txt[10],txt[11]);
+    printf("ON event occured at: %c%c:%c%c\n",txt[12],txt[13],txt[14],txt[15]);
+    printf("IN event occured at: %c%c:%c%c\n",txt[16],txt[17],txt[18],txt[19]);
+    printf("Fuel: %c%c%c%c\n",txt[20],txt[21],txt[22],txt[23]);
+    printf("Destination station: %c%c%c%c\n",txt[24],txt[25],txt[26],txt[27]);
 }
 
 void process_q2(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("ETA: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
-    printf("Fuel: %c%c%c%c\n",txt[7],txt[8],txt[9],txt[10]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("ETA: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("Fuel: %c%c%c%c\n",txt[8],txt[9],txt[10],txt[11]);
 }
 
 void process_qa(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("OUT event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
-    printf("Boarded fuel: %c%c%c%c%c\n",txt[7],txt[8],txt[9],txt[10],txt[11]);
-    printf("Fuel quantity: %c%c%c%c\n",txt[12],txt[13],txt[14],txt[15]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("OUT event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("Boarded fuel: %c%c%c%c%c\n",txt[8],txt[9],txt[10],txt[11],txt[12]);
+    printf("Fuel quantity: %c%c%c%c\n",txt[13],txt[14],txt[15],txt[16]);
 }
 
 void process_qb(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("OFF event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("OFF event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
 }
 
 void process_qc(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("ON event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("ON event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
 }
 
 void process_qd(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("IN event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
-    printf("Boarded fuel: %c%c%c%c%c\n",txt[7],txt[8],txt[9],txt[10],txt[11]);
-    printf("Fuel quantity: %c%c%c%c\n",txt[12],txt[13],txt[14],txt[15]);
-    printf("Captain/First officer ID: %c\n",txt[16]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("IN event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("Boarded fuel: %c%c%c%c%c\n",txt[8],txt[9],txt[10],txt[11],txt[12]);
+    printf("Fuel quantity: %c%c%c%c\n",txt[13],txt[14],txt[15],txt[16]);
+    printf("Captain/First officer ID: %c\n",txt[17]);
 }
 
 
 void process_qe(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("OUT event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
-    printf("Boarded fuel: %c%c%c%c%c\n",txt[7],txt[8],txt[9],txt[10],txt[11]);
-    printf("Fuel quantity: %c%c%c%c\n",txt[12],txt[13],txt[14],txt[15]);
-    printf("Destination station: %c%c%c\n",txt[16],txt[17],txt[18]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("OUT event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("Boarded fuel: %c%c%c%c%c\n",txt[8],txt[9],txt[10],txt[11],txt[12]);
+    printf("Fuel quantity: %c%c%c%c\n",txt[13],txt[14],txt[15],txt[16]);
+    printf("Destination station: %c%c%c\n",txt[17],txt[18],txt[19]);
 }
 
 void process_qf(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("OFF event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
-    printf("Destination station: %c%c%c\n",txt[7],txt[8],txt[9]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("OFF event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("Destination station: %c%c%c%c\n",txt[8],txt[9],txt[10],txt[11]);
 }
 
 
 void process_qg(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("OUT event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
-    printf("Return IN event occured at: %c%c:%c%c\n",txt[7],txt[8],txt[9],txt[10]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("OUT event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("Return IN event occured at: %c%c:%c%c\n",txt[8],txt[9],txt[10],txt[11]);
 }
 
 void process_qh(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("OUT event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("OUT event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
 }
 
 
 void process_qk(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("ON event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
-    printf("Destination station: %c%c%c\n",txt[7],txt[8],txt[9]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("ON event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("Destination station: %c%c%c%c\n",txt[8],txt[9],txt[10],txt[11]);
 }
 
 void process_ql(char *txt)
 {
-    printf("Destination station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("IN event occured at: %c%c:%c%c\n",txt[3],txt[4],txt[5],txt[6]);
-    printf("Fuel quantity: %c%c%c%c\n",txt[7],txt[8],txt[9],txt[10]);
-    printf("Captain/First officer ID: %c\n",txt[11]);
-    printf("Departure station: %c%c%c\n",txt[12],txt[13],txt[14]);
+    printf("Destination station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("IN event occured at: %c%c:%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("Fuel quantity: %c%c%c%c\n",txt[8],txt[9],txt[10],txt[11]);
+    printf("Captain/First officer ID: %c\n",txt[12]);
+    printf("Departure station: %c%c%c%c\n",txt[13],txt[14],txt[15],txt[16]);
 }
 
 void process_qm(char *txt)
 {
-    printf("Destination station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("Fuel quantity: %c%c%c%c\n",txt[3],txt[4],txt[5],txt[6]);
-    printf("Departure station: %c%c%c\n",txt[7],txt[8],txt[9]);
-    printf("Category of landing: %c\n",txt[10]);
+    printf("Destination station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("Fuel quantity: %c%c%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("Departure station: %c%c%c%c\n",txt[8],txt[9],txt[10],txt[11]);
+    printf("Category of landing: %c\n",txt[12]);
 }
 
 void process_qn(char *txt)
 {
-    printf("Destination station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("New destination station: %c%c%c\n",txt[3],txt[4],txt[5]);
-    printf("ETA at diversion station: %c%c:%c%c\n",txt[7],txt[8],txt[9],txt[10]);
-    printf("Fuel quantity: %c%c%c%c\n",txt[11],txt[12],txt[13],txt[14]);
-    printf("Flight segment originating station: %c%c%c\n",txt[15],txt[16],txt[17]);
+    printf("Destination station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("New destination station: %c%c%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("ETA at diversion station: %c%c:%c%c\n",txt[8],txt[9],txt[10],txt[11]);
+    printf("Fuel quantity: %c%c%c%c\n",txt[12],txt[13],txt[14],txt[15]);
+    printf("Flight segment originating station: %c%c%c%c\n",txt[16],txt[17],txt[18],txt[19]);
 }
 
 
 void process_qp(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("Destination station: %c%c%c\n",txt[3],txt[4],txt[5]);
-    printf("OUT event occured at: %c%c:%c%c\n",txt[6],txt[7],txt[8],txt[9]);
-    printf("Boarded fuel: %c%c%c%c%c\n",txt[10],txt[11],txt[12],txt[13],txt[14]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("Destination station: %c%c%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("OUT event occured at: %c%c:%c%c\n",txt[7],txt[8],txt[10],txt[11]);
+    printf("Boarded fuel: %c%c%c%c\n",txt[12],txt[13],txt[14],txt[15]);
 }
 
 void process_qq(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("Destination station: %c%c%c\n",txt[3],txt[4],txt[5]);
-    printf("OFF event occured at: %c%c:%c%c\n",txt[6],txt[7],txt[8],txt[9]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("Destination station: %c%c%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("OFF event occured at: %c%c:%c%c\n",txt[8],txt[9],txt[10],txt[11]);
 }
 
 void process_qr(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("Destination station: %c%c%c\n",txt[3],txt[4],txt[5]);
-    printf("ON event occured at: %c%c:%c%c\n",txt[6],txt[7],txt[8],txt[9]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("Destination station: %c%c%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("ON event occured at: %c%c:%c%c\n",txt[8],txt[9],txt[10],txt[11]);
 }
 
 void process_qs(char *txt)
@@ -1070,11 +1124,11 @@ void process_qs(char *txt)
 
 void process_qt(char *txt)
 {
-    printf("Departure station: %c%c%c\n",txt[0],txt[1],txt[2]);
-    printf("Destination station: %c%c%c\n",txt[3],txt[4],txt[5]);
-    printf("OUT event occured at: %c%c:%c%c\n",txt[6],txt[7],txt[8],txt[9]);
-    printf("Return IN event occured at: %c%c:%c%c\n",txt[10],txt[11],txt[12],txt[13]);
-    printf("Fuel onboard: %c%c%c%c\n",txt[14],txt[15],txt[16],txt[17]);
+    printf("Departure station: %c%c%c%c\n",txt[0],txt[1],txt[2],txt[3]);
+    printf("Destination station: %c%c%c%c\n",txt[4],txt[5],txt[6],txt[7]);
+    printf("OUT event occured at: %c%c:%c%c\n",txt[8],txt[9],txt[10],txt[11]);
+    printf("Return IN event occured at: %c%c:%c%c\n",txt[12],txt[13],txt[14],txt[15]);
+    printf("Fuel onboard: %c%c%c%c\n",txt[16],txt[17],txt[18],txt[19]);
 }
 
 void process_57(char *txt)
@@ -1113,6 +1167,13 @@ void process_h1(char *txt)
 }
 
 
+void process_54(char *txt)
+{
+    printf("Frequency (MHZ): %c%c%c.%c%c%c\n",txt[0],txt[1],txt[2],txt[3],txt[4],txt[5]);
+}
+
+
+
 
 
 
@@ -1142,7 +1203,7 @@ void print_mesg(msg_t * msg) {
 
 	printf("\n[BEGIN_MESSAGE]----------------------------------------------------------\n\n");
 	printf("RX_IDX: %ld\n", rx_idx);
-	if (msg->crc) printf("CRC: Bad\n");
+	if (msg->crc) printf("CRC: Bad, corrected\n");
 	else printf("CRC: Correct\n");
 	t = time(NULL);
 	tmp = localtime(&t);
@@ -1197,12 +1258,10 @@ aircraft_finished:
 	regtmp[1]=msg->fid[1];
 	regtmp[2]='0';
 	ind = 2;
+	int correct = is_flight_num(msg->fid);
 	while ((ind<8)&&(msg->fid[ind]=='0')) ind++;
 	strncpy(&regtmp[3],&msg->fid[ind],8-ind);
-	int correct = is_flight_num(regtmp);
 	if (strlen(msg->fid)>1) while(acars_flights[i].flightid){
-		
-		
 		if ((!found)&&(!strncmp(acars_flights[i].flightid, regtmp,2))&&(correct)) {
 		    printf("Airline: %s \n",acars_flights[i].airline);
 		    found++;
@@ -1259,6 +1318,7 @@ aircraft_finished:
 	if (!strcmp(msg->label,"QT")) process_qt(msg->txt);
 	if (!strcmp(msg->label,"57")) process_57(msg->txt);
 	if (!strcmp(msg->label,"H1")) process_h1(msg->txt);
+	if (!strcmp(msg->label,"54")) process_54(msg->txt);
 
 	printf("Message content:-\n%s", msg->txt);
 
@@ -1306,17 +1366,27 @@ void rotate_90(unsigned char *buf, uint32_t len)
 void low_pass(struct fm_state *fm, unsigned char *buf, uint32_t len)
 /* simple square window FIR */
 {
-	int i=0, i2=0;
+	int i=0, i2=0, seq=0;
 	while (i < (int)len) {
 		fm->now_r += ((int)buf[i]   - 127);
 		fm->now_j += ((int)buf[i+1] - 127);
 		i += 2;
 		fm->prev_index++;
-		if (fm->prev_index < fm->downsample) {
-			continue;
+
+		if ( (fm->prev_index<(fm->downsample)) ) continue;
+		if ((seq%2)==1)
+		{
+		// signal is ~10khz wide, don't need whole 48khz
+		// eliminate some RF noise by attenuating stuff outside 24khz a bit
+		fm->signal[i2]   = (fm->now_r*5)/(8); 
+		fm->signal[i2+1] = (fm->now_j*5)/(8);
 		}
-		fm->signal[i2]   = fm->now_r; // * fm->output_scale;
-		fm->signal[i2+1] = fm->now_j; // * fm->output_scale;
+		else
+		{
+		fm->signal[i2]   = fm->now_r;// * fm->output_scale;
+		fm->signal[i2+1] = fm->now_j;// * fm->output_scale;
+		}
+		seq++;
 		fm->prev_index = 0;
 		fm->now_r = 0;
 		fm->now_j = 0;
@@ -1324,6 +1394,12 @@ void low_pass(struct fm_state *fm, unsigned char *buf, uint32_t len)
 	}
 	fm->signal_len = i2;
 }
+
+
+
+
+
+
 
 void build_fir(struct fm_state *fm)
 /* hamming */
@@ -1356,6 +1432,7 @@ void low_pass_fir(struct fm_state *fm, unsigned char *buf, uint32_t len)
 		fm->now_j += ((int)buf[i+1] - 127) * fm->fir[i3];
 		i += 2;
 		fm->prev_index++;
+		
 		if (fm->prev_index < fm->downsample) {
 			continue;
 		}
@@ -1394,7 +1471,7 @@ void low_pass_real(struct fm_state *fm)
 // add support for upsampling?
 {
 	int i=0, i2=0;
-	int fast = (int)fm->sample_rate / fm->post_downsample;
+	int fast = (int)fm->sample_rate / (fm->post_downsample);
 	int slow = fm->output_rate;
 	while (i < fm->signal2_len) {
 		fm->now_lpr += fm->signal2[i];
@@ -1522,11 +1599,12 @@ void am_demod(struct fm_state *fm)
 		pcm += fm->signal[i+1] * fm->signal[i+1];
 		fm->signal2[i/2] = (int16_t)sqrt(pcm) * fm->output_scale;
 		// Milen: add some gain to signal
-		fm->signal2[i/2] *= 10;
+		fm->signal2[i/2] *= 8;
 	}
 	fm->signal2_len = fm->signal_len/2;
 	// lowpass? (3khz)  highpass?  (dc)
 }
+
 
 
 void deemph_filter(struct fm_state *fm)
@@ -1601,6 +1679,7 @@ static void optimal_settings(struct fm_state *fm, int freq, int hopping)
 {
 	int r, capture_freq, capture_rate;
 	fm->downsample = (1000000 / fm->sample_rate) + 1;
+
 	fm->freq_now = freq;
 	capture_rate = fm->downsample * fm->sample_rate;
 	capture_freq = fm->freqs[freq] + capture_rate/4;
@@ -1612,6 +1691,12 @@ static void optimal_settings(struct fm_state *fm, int freq, int hopping)
 	r = rtlsdr_set_center_freq(dev, (uint32_t)capture_freq);
 	if (hopping) {
 		return;}
+		
+	// Milen: don't need 48khz signal, set cutoff at ~16khz
+	//fm->downsample /=2;
+	//fm->post_downsample*=2;
+
+		
 	fprintf(stderr, "Oversampling input by: %ix.\n", fm->downsample);
 	fprintf(stderr, "Oversampling output by: %ix.\n", fm->post_downsample);
 	fprintf(stderr, "Buffer size: %0.2fms\n",
