@@ -1180,7 +1180,7 @@ void process_54(char *txt)
 int is_flight_num(const char *text)
 {
     int a=0;
-    int ok=1;
+    int ok=1,dig=0;
 
     while (a<6) 
     {
@@ -1188,6 +1188,8 @@ int is_flight_num(const char *text)
 	a++;
     }
     if (!((text[2]>='0') && (text[a]<='2'))) ok = 0;
+    for (a=3;a<6;a++) if (((text[2]>='0') && (text[a]<='2'))) dig = 1;
+    if (dig==0) ok=0;
     return ok;
 }
 
@@ -1259,8 +1261,8 @@ aircraft_finished:
 	regtmp[2]='0';
 	ind = 2;
 	int correct = is_flight_num(msg->fid);
-	while ((ind<8)&&(msg->fid[ind]=='0')) ind++;
-	strncpy(&regtmp[3],&msg->fid[ind],8-ind);
+	while ((ind<7)&&(msg->fid[ind]=='0')) ind++;
+	strncpy(&regtmp[3],&msg->fid[ind],7-ind);
 	if (strlen(msg->fid)>1) while(acars_flights[i].flightid){
 		if ((!found)&&(!strncmp(acars_flights[i].flightid, regtmp,2))&&(correct)) {
 		    printf("Airline: %s \n",acars_flights[i].airline);
