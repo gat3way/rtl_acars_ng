@@ -1188,7 +1188,7 @@ int is_flight_num(const char *text)
 	a++;
     }
     if (!((text[2]>='0') && (text[a]<='2'))) ok = 0;
-    for (a=3;a<6;a++) if (((text[2]>='0') && (text[a]<='2'))) dig = 1;
+    for (a=3;a<6;a++) if (((text[2]>='0') && (text[a]<='9'))) dig = 1;
     if (dig==0) ok=0;
     return ok;
 }
