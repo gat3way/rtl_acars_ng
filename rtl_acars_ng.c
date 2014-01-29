@@ -91,7 +91,7 @@ struct mstat_s {
 		    CRC2, END } state;
 	int ind;
 	unsigned short crc;
-	char txt[243];
+	char txt[256];
 	unsigned char c1,c2,c3;
 } mstat[2];
 
@@ -806,6 +806,7 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 			st->state = TXT;
 			st->ind = 0;
 			st->crc = 0;
+			memset(st->txt,0,256);
 			return 8;
 		case TXT:
 			update_crc(&st->crc, r);
@@ -840,11 +841,6 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 				return 0;
 			}
 			else {
-				// Do some heuristic checks
-				if (msg->addr[7]!=0) {st->state = HEADL;return 8;}
-				int a;
-				for (a=0;a<8;a++) if ((msg->addr[a]<32)&&(msg->addr[a]>127)) {st->state = HEADL;return 8;}
-				for (a=0;a<6;a++) if ((msg->fid[a]<32)&&(msg->fid[a]>127)) {st->state = HEADL;return 8;}
 				int c1,c2,c3,c4,c5,c6;
 				msg->crc = 1;
 
@@ -854,7 +850,7 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 				{
 				    mcrc = 0;
 				    memset(mtxt,0,256);
-				    for (c3=0;c3<st->ind;c3++)
+				    for (c3=(st->ind-1);c3>=0;c3--)
 				    {
 				        if (c1==c3) {update_crc(&mcrc,st->txt[c3]^(1<<c2));mtxt[c3]=(st->txt[c3]^(1<<c2));}
 				        else {update_crc(&mcrc,st->txt[c3]);mtxt[c3]=st->txt[c3];}
@@ -866,6 +862,10 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 				    {
 					memcpy(st->txt,mtxt,st->ind);
 					build_mesg(st->txt, st->ind, msg);
+					// Do some heuristic checks
+					int a;
+					for (a=0;a<8;a++) if ((msg->addr[a]<32)||(msg->addr[a]>127)) {st->state = HEADL;return 8;}
+					for (a=0;a<6;a++) if ((msg->fid[a]<32)||(msg->fid[a]>127)) {st->state = HEADL;return 8;}
 					return 0;
 				    }
 				}
@@ -878,7 +878,7 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 				for (c5=0;c5<8;c5++)
 				{
 				    mcrc = 0;
-				    for (c3=0;c3<st->ind;c3++)
+				    for (c3=(st->ind-1);c3>=0;c3--)
 				    {
 				        if (c1==c3) {update_crc(&mcrc,st->txt[c3]^(1<<c2));mtxt[c3]=(st->txt[c3]^(1<<c2));}
 				        else if (c4==c3) {update_crc(&mcrc,st->txt[c3]^(1<<c5));mtxt[c3]=(st->txt[c3]^(1<<c5));}
@@ -891,6 +891,10 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 				    {
 					memcpy(st->txt,mtxt,st->ind);
 					build_mesg(st->txt, st->ind, msg);
+					// Do some heuristic checks
+					int a;
+					for (a=0;a<8;a++) if ((msg->addr[a]<32)&&(msg->addr[a]>127)) {st->state = HEADL;return 8;}
+					for (a=0;a<6;a++) if ((msg->fid[a]<32)&&(msg->fid[a]>127)) {st->state = HEADL;return 8;}
 					return 0;
 				    }
 				}
