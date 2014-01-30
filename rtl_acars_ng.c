@@ -867,7 +867,6 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 					for (a=0;a<7;a++) if ((msg->addr[a]<32)||(msg->addr[a]>127)) err = 1;
 					if (strlen(msg->fid)>1)
 					for (a=0;a<6;a++) if ((msg->fid[a]<32)||(msg->fid[a]>90)) err = 1;
-					if (err) printf("heuristic1 err=%d %s %s\n",err,msg->addr,msg->fid);
 					if (!err) return 0;
 				    }
 				}
@@ -898,7 +897,6 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 					for (a=0;a<7;a++) if ((msg->addr[a]<32)||(msg->addr[a]>127)) err = 1;
 					if (strlen(msg->fid)>1)
 					for (a=0;a<6;a++) if ((msg->fid[a]<32)||(msg->fid[a]>90)) err = 1;
-					if (err) printf("heuristic err=%d %s %s\n",err,msg->addr,msg->fid);
 					if (!err) return 0;
 				    }
 				}
