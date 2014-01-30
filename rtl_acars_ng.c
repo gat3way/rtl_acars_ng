@@ -841,18 +841,17 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 				return 0;
 			}
 			else {
-				int c1,c2,c3,c4,c5,c6;
+				int c1,c2,c3,c4,c5,c6,err;
 				msg->crc = 1;
-
 				// Correct CRC, single bit error
 				for (c1=0;c1<st->ind;c1++)
 				for (c2=0;c2<8;c2++)
 				{
 				    mcrc = 0;
 				    memset(mtxt,0,256);
-				    for (c3=(st->ind-1);c3>=0;c3--)
+				    for (c3=0;c3<st->ind;c3++)
 				    {
-				        if (c1==c3) {update_crc(&mcrc,st->txt[c3]^(1<<c2));mtxt[c3]=(st->txt[c3]^(1<<c2));}
+				        if (c1==c3) {update_crc(&mcrc,st->txt[c3]^((unsigned char)1<<(unsigned char)c2));mtxt[c3]=(st->txt[c3]^((unsigned char)1<<(unsigned char)c2));}
 				        else {update_crc(&mcrc,st->txt[c3]);mtxt[c3]=st->txt[c3];}
 				    }
 				    update_crc(&mcrc, st->c1);
@@ -864,24 +863,26 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 					build_mesg(st->txt, st->ind, msg);
 					// Do some heuristic checks
 					int a;
-					for (a=0;a<8;a++) if ((msg->addr[a]<32)||(msg->addr[a]>127)) {st->state = HEADL;return 8;}
-					for (a=0;a<6;a++) if ((msg->fid[a]<32)||(msg->fid[a]>127)) {st->state = HEADL;return 8;}
-					return 0;
+					err = 0;
+					for (a=0;a<7;a++) if ((msg->addr[a]<32)||(msg->addr[a]>127)) err = 1;
+					if (strlen(msg->fid)>1)
+					for (a=0;a<6;a++) if ((msg->fid[a]<32)||(msg->fid[a]>90)) err = 1;
+					if (err) printf("heuristic1 err=%d %s %s\n",err,msg->addr,msg->fid);
+					if (!err) return 0;
 				    }
 				}
 				// Correct CRC, two bit error
 				memset(mtxt,0,256);
 				for (c1=0;c1<st->ind;c1++)
-				{
 				for (c2=0;c2<8;c2++)
 				for (c4=0;c4<st->ind;c4++)
 				for (c5=0;c5<8;c5++)
 				{
 				    mcrc = 0;
-				    for (c3=(st->ind-1);c3>=0;c3--)
+				    for (c3=0;c3<st->ind;c3++)
 				    {
-				        if (c1==c3) {update_crc(&mcrc,st->txt[c3]^(1<<c2));mtxt[c3]=(st->txt[c3]^(1<<c2));}
-				        else if (c4==c3) {update_crc(&mcrc,st->txt[c3]^(1<<c5));mtxt[c3]=(st->txt[c3]^(1<<c5));}
+				        if (c1==c3) {update_crc(&mcrc,st->txt[c3]^((unsigned char)1<<(unsigned char)c2));mtxt[c3]=(st->txt[c3]^((unsigned char)1<<(unsigned char)c2));}
+				        else if (c4==c3) {update_crc(&mcrc,st->txt[c3]^((unsigned char)1<<(unsigned char)c5));mtxt[c3]=(st->txt[c3]^((unsigned char)1<<(unsigned char)c5));}
 				        else {update_crc(&mcrc,st->txt[c3]);mtxt[c3]=st->txt[c3];}
 				    }
 				    update_crc(&mcrc, st->c1);
@@ -893,15 +894,17 @@ int getmesg(unsigned char r, msg_t * msg, int ch) {
 					build_mesg(st->txt, st->ind, msg);
 					// Do some heuristic checks
 					int a;
-					for (a=0;a<8;a++) if ((msg->addr[a]<32)&&(msg->addr[a]>127)) {st->state = HEADL;return 8;}
-					for (a=0;a<6;a++) if ((msg->fid[a]<32)&&(msg->fid[a]>127)) {st->state = HEADL;return 8;}
-					return 0;
+					err = 0;
+					for (a=0;a<7;a++) if ((msg->addr[a]<32)||(msg->addr[a]>127)) err = 1;
+					if (strlen(msg->fid)>1)
+					for (a=0;a<6;a++) if ((msg->fid[a]<32)||(msg->fid[a]>90)) err = 1;
+					if (err) printf("heuristic err=%d %s %s\n",err,msg->addr,msg->fid);
+					if (!err) return 0;
 				    }
 				}
-				}
-				return 8;
+				st->state = HEADL;return 8;
 			}
-			return 8;
+			st->state = HEADL;return 8;
 		}
 	} while (1);
 }
@@ -1191,7 +1194,7 @@ int is_flight_num(const char *text)
 	if (!((text[a]=='-') || (text[a]=='.') || ((text[a]<='Z') && (text[a]>='A')) || ((text[a]>='0') && (text[a]<='9')))) ok = 0;
 	a++;
     }
-    if (!((text[2]>='0') && (text[a]<='2'))) ok = 0;
+    if (!((text[2]>='0') && (text[a]<='9'))) ok = 0;
     for (a=3;a<6;a++) if (((text[2]>='0') && (text[a]<='9'))) dig = 1;
     if (dig==0) ok=0;
     return ok;
@@ -1262,18 +1265,21 @@ aircraft_finished:
 	int ind = 0;
 	regtmp[0]=msg->fid[0];
 	regtmp[1]=msg->fid[1];
-	regtmp[2]='0';
-	ind = 2;
+	ind = 1;
 	int correct = is_flight_num(msg->fid);
-	while ((ind<7)&&(msg->fid[ind]=='0')) ind++;
-	strncpy(&regtmp[3],&msg->fid[ind],7-ind);
-	if (strlen(msg->fid)>1) while(acars_flights[i].flightid){
+	while ((ind<7)/*&&(msg->fid[ind]=='0')*/) 
+	{
+	    regtmp[2]='0';
+	    if (ind>1) strncpy(&regtmp[3],&msg->fid[ind],7-ind);
+	    else strncpy(&regtmp[2],&msg->fid[ind+1],7);
+	    ind++;
+	    if (strlen(msg->fid)>1) while(acars_flights[i].flightid){
 		if ((!found)&&(!strncmp(acars_flights[i].flightid, regtmp,2))&&(correct)) {
 		    printf("Airline: %s \n",acars_flights[i].airline);
 		    found++;
 		}
 
-		if ((correct)&&(!strncmp(acars_flights[i].flightid, regtmp,2)) && (!strncmp(acars_flights[i].flightid+3, regtmp+3,strlen(regtmp+3))))
+		if ((correct)&&(!strncmp(acars_flights[i].flightid, regtmp,2)) && (!strncmp(acars_flights[i].flightid+3, regtmp+3,strlen(regtmp+3)))&&(strlen(regtmp+3)>0))
 		{
 			long x = 0;
 			while((acars_airports[x].code)&&(found2==0)){
@@ -1295,6 +1301,7 @@ aircraft_finished:
 			}
 		}
 		i++;
+	    }
 	}
 
 
