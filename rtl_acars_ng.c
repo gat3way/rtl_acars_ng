@@ -1268,8 +1268,8 @@ aircraft_finished:
 	while ((ind<7)/*&&(msg->fid[ind]=='0')*/) 
 	{
 	    regtmp[2]='0';
-	    if (ind>1) strncpy(&regtmp[3],&msg->fid[ind],7-ind);
-	    else strncpy(&regtmp[2],&msg->fid[ind+1],7);
+	    if (ind>1) strncpy(&regtmp[3], &msg->fid[ind], 7-ind);
+	    else strncpy(&regtmp[2], &msg->fid[ind+1], 4);
 	    ind++;
 	    if (strlen(msg->fid)>1) while(acars_flights[i].flightid){
 		if ((!found)&&(!strncmp(acars_flights[i].flightid, regtmp,2))&&(correct)) {
