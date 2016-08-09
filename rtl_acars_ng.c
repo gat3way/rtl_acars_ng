@@ -239,6 +239,7 @@ void usage(void)
 		"\t[-r squelch debug mode ]\n"
 		"\t[-t squelch_delay (default: 0)]\n"
 		"\t (+values will mute/scan, -values will exit)\n"
+		"\t[-D datasets_dir (default: ./datasets)]\n"
 		"\t[-F enables Hamming FIR (default: off/square)]\n", __progname, __progname);
 	exit(1);
 }
@@ -265,11 +266,26 @@ static void sighandler(int signum)
 #endif
 
 
-void load_flights(void)
+FILE *fopen_datafile(char *d, char *f)
 {
-	FILE *f = fopen("datasets/flightroute2.txt", "r");
+	char df[PATH_MAX];
+	FILE *fp;
+
+	snprintf(df, PATH_MAX-1, "%s/%s", d, f);
+
+	fp = fopen(df, "r");
+	if (!fp) {
+		fprintf(stderr, "Warning: %s data source not found\n", df);
+		return NULL;
+	}
+	return fp;
+}
+
+
+void load_flights(char *d)
+{
+	FILE *f = fopen_datafile(d, "flightroute2.txt");
 	if (!f) {
-		fprintf(stderr, "Warning: datasets/flightroute2.txt data source not found\n");
 		acars_flights[0].flightid = NULL;
 		return;
 	}
@@ -315,11 +331,10 @@ void load_flights(void)
 
 
 
-void load_airports(void)
+void load_airports(char *d)
 {
-	FILE *f = fopen("datasets/airports.txt", "r");
+	FILE *f = fopen_datafile(d, "airports.txt");
 	if (!f) {
-		fprintf(stderr, "Warning: datasets/airports.txt data source not found\n");
 		acars_airports[0].code = NULL;
 		return;
 	}
@@ -363,11 +378,10 @@ void load_airports(void)
 }
 
 
-void load_aircrafts(void)
+void load_aircrafts(char *d)
 {
-	FILE *f = fopen("datasets/aircrafts.txt", "r");
+	FILE *f = fopen_datafile(d, "aircrafts.txt");
 	if (!f) {
-		fprintf(stderr, "Warning: datasets/aircrafts.txt data source not found\n");
 		acars_aircrafts[0].registration = NULL;
 		return;
 	}
@@ -413,11 +427,10 @@ void load_aircrafts(void)
 
 
 
-void load_message_labels(void)
+void load_message_labels(char *d)
 {
-	FILE *f = fopen("datasets/acars_mls.txt", "r");
+	FILE *f = fopen_datafile(d, "acars_mls.txt");
 	if (!f) {
-		fprintf(stderr, "Warning: datasets/acars_mls.txt data source not found\n");
 		acars_mls[0].ml_code = NULL;
 		return;
 	}
@@ -1974,6 +1987,8 @@ int main(int argc, char **argv)
 	int device_count;
 	int ppm_error = 0;
 	char vendor[256], product[256], serial[256];
+	char *datasets_dir = "./datasets";
+
 	fm_init(&fm);
 	pthread_cond_init(&data_ready, NULL);
 	pthread_rwlock_init(&data_rw, NULL);
@@ -1981,7 +1996,7 @@ int main(int argc, char **argv)
 	pthread_mutex_init(&dataset_mutex, NULL);
 	fm.sample_rate = (uint32_t) 48000;
 
-	while ((opt = getopt(argc, argv, "d:f:g:s:b:l:o:t:p:EFA:rNWMULRDCh")) != -1) {
+	while ((opt = getopt(argc, argv, "f:d:g:l:o:t:rp:D:Fh")) != -1) {
 		switch (opt) {
 		case 'd':
 			dev_index = atoi(optarg);
@@ -2020,6 +2035,9 @@ int main(int argc, char **argv)
 			break;
 		case 'p':
 			ppm_error = atoi(optarg);
+			break;
+		case 'D':
+			datasets_dir = strdup(optarg);
 			break;
 		case 'F':
 			fm.fir_enable = 1;
@@ -2149,10 +2167,10 @@ int main(int argc, char **argv)
 			      DEFAULT_ASYNC_BUF_NUMBER,
 			      ACTUAL_BUF_LENGTH);*/
 	fprintf(stderr, "\n");
-	load_aircrafts();
-	load_airports();
-	load_flights();
-	load_message_labels();
+	load_aircrafts(datasets_dir);
+	load_airports(datasets_dir);
+	load_flights(datasets_dir);
+	load_message_labels(datasets_dir);
 	init_bits();
 	init_mesg();
 	printf("Listening for ACARS traffic...\n");
