@@ -220,14 +220,17 @@ int nbitl = 0;
 int nrbitl = 8;
 
 
+
 void usage(void)
 {
+	extern char *__progname;
 	fprintf(stderr,
-		"rtl_fm, a simple narrow band FM demodulator for RTL2832 based DVB-T receivers\n\n"
-		"Use:\tnew_rtl_acars -f freq [-options] \n"
+		"%s - decoding ACARS transmissions with RTL2832 based DVB-T receivers\n\n"
+		"Usage:\t%s -f freq [-options] \n"
 		"\t-f frequency_to_tune_to [Hz]\n"
 		"\t (use multiple -f for scanning, requires squelch)\n"
 		"\t (ranges supported, -f 118M:137M:25k)\n"
+		"\t (try 131.55M, 129.125M, 130.025M, or 130.425M)\n"
 		"\t[-d device_index (default: 0)]\n"
 		"\t[-g tuner_gain (default: automatic)]\n"
 		"\t[-l squelch_level (default: 0/off)]\n"
@@ -236,7 +239,8 @@ void usage(void)
 		"\t[-r squelch debug mode ]\n"
 		"\t[-t squelch_delay (default: 0)]\n"
 		"\t (+values will mute/scan, -values will exit)\n"
-		"\t[-F enables Hamming FIR (default: off/square)]\n");
+		"\t[-D datasets_dir (default: ./datasets)]\n"
+		"\t[-F enables Hamming FIR (default: off/square)]\n", __progname, __progname);
 	exit(1);
 }
 
@@ -262,11 +266,26 @@ static void sighandler(int signum)
 #endif
 
 
-void load_flights(void)
+FILE *fopen_datafile(char *d, char *f)
 {
-	FILE *f = fopen("datasets/flightroute2.txt", "r");
+	char df[PATH_MAX];
+	FILE *fp;
+
+	snprintf(df, PATH_MAX-1, "%s/%s", d, f);
+
+	fp = fopen(df, "r");
+	if (!fp) {
+		fprintf(stderr, "Warning: %s data source not found\n", df);
+		return NULL;
+	}
+	return fp;
+}
+
+
+void load_flights(char *d)
+{
+	FILE *f = fopen_datafile(d, "flightroute2.txt");
 	if (!f) {
-		fprintf(stderr, "Warning: datasets/flightroute2.txt data source not found\n");
 		acars_flights[0].flightid = NULL;
 		return;
 	}
@@ -312,11 +331,10 @@ void load_flights(void)
 
 
 
-void load_airports(void)
+void load_airports(char *d)
 {
-	FILE *f = fopen("datasets/airports.txt", "r");
+	FILE *f = fopen_datafile(d, "airports.txt");
 	if (!f) {
-		fprintf(stderr, "Warning: datasets/airports.txt data source not found\n");
 		acars_airports[0].code = NULL;
 		return;
 	}
@@ -360,11 +378,10 @@ void load_airports(void)
 }
 
 
-void load_aircrafts(void)
+void load_aircrafts(char *d)
 {
-	FILE *f = fopen("datasets/aircrafts.txt", "r");
+	FILE *f = fopen_datafile(d, "aircrafts.txt");
 	if (!f) {
-		fprintf(stderr, "Warning: datasets/aircrafts.txt data source not found\n");
 		acars_aircrafts[0].registration = NULL;
 		return;
 	}
@@ -410,11 +427,10 @@ void load_aircrafts(void)
 
 
 
-void load_message_labels(void)
+void load_message_labels(char *d)
 {
-	FILE *f = fopen("datasets/acars_mls.txt", "r");
+	FILE *f = fopen_datafile(d, "acars_mls.txt");
 	if (!f) {
-		fprintf(stderr, "Warning: datasets/acars_mls.txt data source not found\n");
 		acars_mls[0].ml_code = NULL;
 		return;
 	}
@@ -1971,6 +1987,8 @@ int main(int argc, char **argv)
 	int device_count;
 	int ppm_error = 0;
 	char vendor[256], product[256], serial[256];
+	char *datasets_dir = "./datasets";
+
 	fm_init(&fm);
 	pthread_cond_init(&data_ready, NULL);
 	pthread_rwlock_init(&data_rw, NULL);
@@ -1978,7 +1996,7 @@ int main(int argc, char **argv)
 	pthread_mutex_init(&dataset_mutex, NULL);
 	fm.sample_rate = (uint32_t) 48000;
 
-	while ((opt = getopt(argc, argv, "d:f:g:s:b:l:o:t:p:EFA:rNWMULRDCh")) != -1) {
+	while ((opt = getopt(argc, argv, "f:d:g:l:o:t:rp:D:Fh")) != -1) {
 		switch (opt) {
 		case 'd':
 			dev_index = atoi(optarg);
@@ -2018,6 +2036,9 @@ int main(int argc, char **argv)
 		case 'p':
 			ppm_error = atoi(optarg);
 			break;
+		case 'D':
+			datasets_dir = strdup(optarg);
+			break;
 		case 'F':
 			fm.fir_enable = 1;
 			break;
@@ -2031,7 +2052,7 @@ int main(int argc, char **argv)
 	fm.sample_rate *= fm.post_downsample;
 
 	if (fm.freq_len == 0) {
-		fprintf(stderr, "Please specify a frequency.\n");
+		fprintf(stderr, "Please specify a frequency, eg 131.55M\n");
 		exit(1);
 	}
 
@@ -2146,10 +2167,10 @@ int main(int argc, char **argv)
 			      DEFAULT_ASYNC_BUF_NUMBER,
 			      ACTUAL_BUF_LENGTH);*/
 	fprintf(stderr, "\n");
-	load_aircrafts();
-	load_airports();
-	load_flights();
-	load_message_labels();
+	load_aircrafts(datasets_dir);
+	load_airports(datasets_dir);
+	load_flights(datasets_dir);
+	load_message_labels(datasets_dir);
 	init_bits();
 	init_mesg();
 	printf("Listening for ACARS traffic...\n");
