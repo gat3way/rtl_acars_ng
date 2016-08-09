@@ -220,14 +220,17 @@ int nbitl = 0;
 int nrbitl = 8;
 
 
+
 void usage(void)
 {
+	extern char *__progname;
 	fprintf(stderr,
-		"rtl_fm, a simple narrow band FM demodulator for RTL2832 based DVB-T receivers\n\n"
-		"Use:\tnew_rtl_acars -f freq [-options] \n"
+		"%s - decoding ACARS transmissions with RTL2832 based DVB-T receivers\n\n"
+		"Usage:\t%s -f freq [-options] \n"
 		"\t-f frequency_to_tune_to [Hz]\n"
 		"\t (use multiple -f for scanning, requires squelch)\n"
 		"\t (ranges supported, -f 118M:137M:25k)\n"
+		"\t (try 131.55M, 129.125M, 130.025M, or 130.425M)\n"
 		"\t[-d device_index (default: 0)]\n"
 		"\t[-g tuner_gain (default: automatic)]\n"
 		"\t[-l squelch_level (default: 0/off)]\n"
@@ -236,7 +239,7 @@ void usage(void)
 		"\t[-r squelch debug mode ]\n"
 		"\t[-t squelch_delay (default: 0)]\n"
 		"\t (+values will mute/scan, -values will exit)\n"
-		"\t[-F enables Hamming FIR (default: off/square)]\n");
+		"\t[-F enables Hamming FIR (default: off/square)]\n", __progname, __progname);
 	exit(1);
 }
 
@@ -2031,7 +2034,7 @@ int main(int argc, char **argv)
 	fm.sample_rate *= fm.post_downsample;
 
 	if (fm.freq_len == 0) {
-		fprintf(stderr, "Please specify a frequency.\n");
+		fprintf(stderr, "Please specify a frequency, eg 131.55M\n");
 		exit(1);
 	}
 
